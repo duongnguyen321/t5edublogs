@@ -2,7 +2,7 @@
 
 > flaky test, sdet, tu dong hoa kiem thu, kiem thu phan mem, playwrigh selenium
 
-![Square 1:1 editorial cover for an article titled 'Cách Khắc Phục Flaky Test Cho SDET'. Visual style: minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, paper white and zinc-50 background #fafafa, zinc-900 content #18181b, t5edu blue accent #1a73e8, amber highlight #f59e0b. Composition features a central card showing a unstable test result icon fluctuating between a green checkmark and a red cross over a timeline graph. Exact Vietnamese labels: 'Flaky', 'Stable', 'CI/CD'. No people, no faces, no hands, no 3D, no glossy plastic, no photorealism, no watermark](IMAGE_PLACEHOLDER_COVER)
+![Square 1:1 editorial cover for an article titled 'Cách Khắc Phục Flaky Test Cho SDET'. Visual style: minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, paper white and zinc-50 background #fafafa, zinc-900 content #18181b, t5edu blue accent #1a73e8, amber highlight #f59e0b. Composition features a central card showing a unstable test result icon fluctuating between a green checkmark and a red cross over a timeline graph. Exact Vietnamese labels: 'Flaky', 'Stable', 'CI/CD'. No people, no faces, no hands, no 3D, no glossy plastic, no photorealism, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/eLnWXBGIzJBJYtmc.png)
 
 ## Flaky test là gì và tác hại khủng khiếp trong dự án
 
@@ -20,7 +20,7 @@ Nguyên nhân phổ biến đầu tiên là vấn đề đồng bộ thời gian
 
 Nguyên nhân thứ hai là sự phụ thuộc lẫn nhau giữa các ca kiểm thử (test interdependence). Nếu test case B yêu cầu dữ liệu do test case A tạo ra, nhưng vì một lý do nào đó test case A chạy chậm hoặc thất bại, test case B sẽ ngay lập tức fail oan uổng. Nguyên nhân thứ ba là môi trường dữ liệu không ổn định, chẳng hạn như việc sử dụng chung một tài khoản test trong cơ sở dữ liệu khiến nhiều luồng test tranh chấp dữ liệu lẫn nhau.
 
-![Wide 3:1 educational diagram explaining common root causes of flaky tests in automation suites. Layout: three cards in a row representing Timing Issues, Test Interdependence, and Shared Data Conflict, connected by T5Edu blue arrows. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](IMAGE_PLACEHOLDER_SLOT_0)
+![Wide 3:1 educational diagram explaining common root causes of flaky tests in automation suites. Layout: three cards in a row representing Timing Issues, Test Interdependence, and Shared Data Conflict, connected by T5Edu blue arrows. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/xivilTCePmjjvAyb.png)
 
 ## Các chiến lược kỹ thuật để khử bỏ flaky test hiệu quả
 
@@ -52,7 +52,7 @@ Bổ sung cơ chế retry có kiểm soát cho các mạng lưới bên ngoài k
 ```
 </grid-content>
 
-![Wide 3:1 educational diagram showing test isolation and dynamic waiting strategies. Layout: two balanced comparison boxes showing hardcoded sleep versus smart auto-waiting. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](IMAGE_PLACEHOLDER_SLOT_1)
+![Wide 3:1 educational diagram showing test isolation and dynamic waiting strategies. Layout: two balanced comparison boxes showing hardcoded sleep versus smart auto-waiting. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/jgpzjyRTJLWpwhlf.png)
 
 ## Xây dựng quy trình giám sát và quản lý test suite ổn định
 
@@ -79,7 +79,7 @@ Các bước cô lập hiệu quả gồm:
 ```
 </dropdown-content>
 
-![Wide 3:1 educational diagram showing CI/CD pipeline integration and flaky test tracking dashboard. Layout: pipeline flow chart with a flagged unstable test block connected to an analytics report. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](IMAGE_PLACEHOLDER_SLOT_2)
+![Wide 3:1 educational diagram showing CI/CD pipeline integration and flaky test tracking dashboard. Layout: pipeline flow chart with a flagged unstable test block connected to an analytics report. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/bvDTvyUOtiJyIdtI.png)
 
 ## Tổng kết
 

@@ -2,7 +2,7 @@
 
 > api testing, fresher tester, postman co ban, kiem thu api, tai lieu api
 
-![Square 1:1 editorial cover for an article titled 'Hướng Dẫn API Testing Cho Người Mới'. Visual style: minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, paper white and zinc-50 background #fafafa, zinc-900 content #18181b, t5edu blue accent #1a73e8, amber highlight #f59e0b. Composition features a central card showing a client-server HTTP request-response flow with flat icons for a client laptop, a network tunnel, and a server database. Exact Vietnamese labels: 'Client', 'API', 'Server'. No people, no faces, no hands, no 3D, no glossy plastic, no photorealism, no watermark](IMAGE_PLACEHOLDER_COVER)
+![Square 1:1 editorial cover for an article titled 'Hướng Dẫn API Testing Cho Người Mới'. Visual style: minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, paper white and zinc-50 background #fafafa, zinc-900 content #18181b, t5edu blue accent #1a73e8, amber highlight #f59e0b. Composition features a central card showing a client-server HTTP request-response flow with flat icons for a client laptop, a network tunnel, and a server database. Exact Vietnamese labels: 'Client', 'API', 'Server'. No people, no faces, no hands, no 3D, no glossy plastic, no photorealism, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/EecMolQmeHrazCrF.png)
 
 ## API testing là gì và vì sao tester cần biết sớm
 
@@ -20,7 +20,7 @@ Thành phần đầu tiên của request là **Method (Phương thức)**, thể
 
 Phía bên kia, response trả về từ server bao gồm **Status Code** (mã trạng thái), headers và body chứa kết quả dữ liệu dưới dạng JSON hoặc XML. Status code là yếu tố quan trọng nhất mà tester cần kiểm tra đầu tiên. Nhóm mã 2xx báo hiệu thành công, nhóm 4xx báo hiệu lỗi từ phía client (như 400 Bad Request, 401 Unauthorized, 404 Not Found), và nhóm 5xx báo hiệu lỗi từ phía server.
 
-![Wide 3:1 educational diagram explaining HTTP request and response structure for API testing. Layout: three horizontal blocks representing Request, Network, and Response, connected by blue arrows. Request block shows Method and Headers, Response block shows Status Code 200 OK and JSON body. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](IMAGE_PLACEHOLDER_SLOT_0)
+![Wide 3:1 educational diagram explaining HTTP request and response structure for API testing. Layout: three horizontal blocks representing Request, Network, and Response, connected by blue arrows. Request block shows Method and Headers, Response block shows Status Code 200 OK and JSON body. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/YYORgzXWtZeKeNLM.png)
 
 ## Các bước thực hiện API testing đầu tiên với Postman
 
@@ -63,7 +63,7 @@ Các bước kiểm tra bảo mật cơ bản gồm:
 ```
 </dropdown-content>
 
-![Wide 3:1 educational diagram showing API security testing workflow with authentication checks. Layout: three sequential blocks representing Unauthenticated Request, Authorization Check, and Response Validation, connected by T5Edu blue arrows. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](IMAGE_PLACEHOLDER_SLOT_1)
+![Wide 3:1 educational diagram showing API security testing workflow with authentication checks. Layout: three sequential blocks representing Unauthenticated Request, Authorization Check, and Response Validation, connected by T5Edu blue arrows. Minimalist flat vector UI design, premium professional EdTech editorial artwork, paper white background #fafafa, zinc-900 content, t5edu blue accent #1a73e8, amber highlight #f59e0b, no people, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/uQJRcuOKXsIFssdV.png)
 
 ## Tổng kết
 
