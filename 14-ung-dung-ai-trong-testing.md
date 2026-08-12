@@ -1,4 +1,4 @@
-# Ứng Dụng AI Trong Testing: Manual Testing Và Automated Testing Đang Thay Đổi Như Thế Nào
+# Ứng Dụng AI Trong Testing
 > ai-trong-testing,software-testing,manual-testing,test-automation,qa-engineer
 
 ![Square 1:1 editorial cover for an article titled 'Ứng Dụng AI Trong Testing'. The visual must communicate AI augmenting both manual and automated software testing directly. Composition: a clean bento-grid layout with a large central panel showing a stylized brain circuit icon merged with a checkmark symbol. Left supporting block: a document icon labeled 'Test Case' with a sparkle accent. Right supporting block: a gear icon inside a screen frame labeled 'Automation'. Bottom strip: a small bar chart block showing rising coverage. Exact Vietnamese labels: 'AI trong Testing', 'Manual', 'Automation'. Visual relationships: thin T5Edu Blue connector lines link the central brain icon to both side blocks; an Amber highlight dot marks the automation gear. Minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, Paper White and Zinc-50 background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlights #f59e0b, subtle one-pixel borders and restrained liquid-glass layers, simple flat icons and geometric shapes, no people, no faces, no hands, no 3D, no glossy plastic, no photorealism, no dramatic lighting, no purple, no violet, no pink, no neon, no logo, no watermark.](IMAGE_PLACEHOLDER_COVER)
@@ -60,8 +60,9 @@ Bối cảnh: hệ thống thanh toán hỗ trợ 3 phương thức (thẻ nội
 Vai trò: đóng vai Senior Tester 5 năm kinh nghiệm.
 Yêu cầu: sinh test case dạng bảng với các cột ID, Precondition, Steps, Expected Result, Priority.
 Bắt buộc: bao gồm boundary value, negative test, trường hợp concurrent login và session timeout.
-```
+
 Không kỳ vọng kết quả hoàn hảo ngay lần đầu. Hãy yêu cầu bổ sung ở lượt tiếp theo, ví dụ "thêm các case liên quan timeout phiên đăng nhập".
+```
 </dropdown-content>
 
 ## AI cách mạng hóa Automated Testing như thế nào?
