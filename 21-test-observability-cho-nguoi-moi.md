@@ -42,10 +42,14 @@ Cách đọc một test failure bằng ba câu hỏi
 ```markdown
 **Điều gì đã xảy ra?**
 Đọc log theo timestamp và test step. Xác định action cuối cùng đã hoàn tất, status code và error message chính xác.
+```
 
+```markdown
 **Nó xảy ra ở đâu?**
 Dùng trace id hoặc request id để nối browser, API gateway và service. Nếu không có trace, ghi nhận đây là gap về evidence.
+```
 
+```markdown
 **Có lặp lại theo quy luật không?**
 So sánh metric theo thời điểm, môi trường, browser, branch và version. Một failure chỉ xuất hiện lúc tải cao có thể khác lỗi luôn tái hiện ở mọi run.
 ```
