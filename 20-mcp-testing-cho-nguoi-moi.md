@@ -71,13 +71,16 @@ Bốn lớp kiểm thử MCP mà fresher có thể áp dụng
 ```markdown
 **Contract**
 Kiểm tra tool name, mô tả, input schema, output schema và error format. Đây là lớp dễ bắt đầu nhất vì expected result khá ổn định.
-
+```
+```markdown
 **Behavior**
 Gửi input đại diện cho happy path, boundary và invalid case. Xác minh tool thực hiện đúng nghiệp vụ thay vì chỉ trả HTTP 200.
-
+```
+```markdown
 **Agent**
 Kiểm tra AI có chọn đúng tool, truyền đủ argument, xử lý kết quả và dừng đúng lúc hay không.
-
+```
+```markdown
 **Safety**
 Kiểm tra permission, data isolation, confirmation trước hành động rủi ro và khả năng chống prompt injection.
 ```
