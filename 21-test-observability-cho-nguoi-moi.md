@@ -101,25 +101,30 @@ Quy tắc redaction tối thiểu:
 
 Đây là điểm người mới dễ bỏ qua: observability cũng có risk. Data càng chi tiết càng dễ giúp debug, nhưng cũng tăng chi phí lưu trữ và nguy cơ lộ thông tin. Hãy thống nhất trước field nào bắt buộc, field nào được mask và thời gian lưu evidence.
 
-![Wide 21:9 beginner learning roadmap for test observability over seven days. Seven compact horizontal cards with blue arrows and exact Vietnamese labels: 'Ngày 1 Signals', 'Ngày 2 Run ID', 'Ngày 3 Request ID', 'Ngày 4 Trace', 'Ngày 5 Bug report', 'Ngày 6 Redaction', 'Ngày 7 Summary'. Each card has a simple flat icon, amber milestone dot, and generous spacing. Minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, Paper White #fafafa background, Zinc-900 #18181b, T5Edu Blue #1a73e8, Amber #f59e0b, subtle one-pixel borders, restrained liquid-glass layers, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/gcPDlbFhVAKFSXxw.png)
+## Từ test failure đến bug report có thể hành động
 
-## Lộ trình 7 ngày học test observability cho fresher
+Observability chỉ tạo giá trị khi evidence được chuyển thành kết luận có thể hành động. Một bug report tốt không chép toàn bộ log. Nó chọn đúng đoạn chứng minh, chỉ ra điểm bắt đầu bất thường và phân biệt triệu chứng với nguyên nhân có khả năng cao.
 
-Bạn có thể luyện bằng một project API nhỏ hoặc trang web demo. Mục tiêu không phải dựng nền tảng monitoring hoàn chỉnh mà là biết thu thập, liên kết và giải thích evidence.
-
-| Ngày | Bài tập | Kết quả cần đạt |
+| Thành phần report | Nội dung nên ghi | Ví dụ ngắn |
 | --- | --- | --- |
-| 1 | Phân biệt logs, metrics, traces | Giải thích được vai trò từng signal |
-| 2 | Thêm test run id và timestamp | Tìm được đúng run trong log |
-| 3 | Ghi request id cho API test | Nối được test step với response |
-| 4 | Đọc một trace nhiều service | Xác định span chậm nhất |
-| 5 | Tạo failure có chủ đích | Viết được bug report có evidence |
-| 6 | Kiểm tra redaction | Không còn token hoặc data nhạy cảm |
-| 7 | Viết test summary | Phân biệt product bug, test bug và environment issue |
+| Scenario | User flow và test case | Checkout với payment sandbox |
+| First abnormal signal | Signal đầu tiên lệch expected | Payment span tăng lên 7,8 giây |
+| Correlation | ID nối các hệ thống | `trace_id=4f3c2a` |
+| Impact | Người dùng hoặc chức năng bị ảnh hưởng | Không tạo được order |
+| Reproduction | Điều kiện tái hiện | Chỉ xảy ra dưới tải cao |
+| Next action | Bước kiểm tra tiếp theo | Kiểm tra timeout và pool connection |
 
-Trong quá trình học, hãy kết hợp với [API Testing cơ bản](/courses/api-testing-co-ban). API test thường cho evidence rõ hơn UI test vì tester nhìn được request, response, status code và timing. Khi đã quen, bạn có thể tiến tới [API Testing nâng cao](/courses/api-testing-nang-cao) để hiểu thêm về integration và dependency.
+![Wide 21:9 educational bug triage board for test observability. Arrange six connected cards from left to right labeled exactly 'Scenario', 'First signal', 'Trace ID', 'Impact', 'Reproduction', and 'Next action', ending in a blue bug report card labeled 'Actionable report'. Use blue arrows for evidence flow and amber highlights on the first abnormal signal and next action. Minimalist flat vector UI design, premium professional EdTech editorial artwork, clean horizontal bento-grid, Paper White #fafafa background, Zinc-900 #18181b, T5Edu Blue #1a73e8, Amber #f59e0b, subtle one-pixel borders, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/mPvmPQyWQYsXnWwu.png)
 
-Một test summary tốt không chỉ ghi “10 pass, 1 fail”. Nó nên trả lời failure ảnh hưởng scenario nào, có reproduce không, evidence nằm ở đâu, mức độ tin cậy của kết luận và hành động tiếp theo. Đây là kỹ năng giúp fresher nổi bật khi làm việc với developer và khi trình bày trong phỏng vấn.
+<multiple-choice correct="D" select="single">
+Một trace cho thấy payment service chậm, nhưng database và API gateway vẫn bình thường. Kết luận nào phù hợp nhất trong bug report?
+- A: Database chắc chắn bị hỏng
+- B: Test chắc chắn bị flaky
+- C: Chỉ cần chụp thêm screenshot
+- D: Payment service là điểm cần điều tra tiếp, chưa đủ evidence để kết luận nguyên nhân cuối
+</multiple-choice>
+
+Hãy tránh hai lỗi khi viết report. Lỗi thứ nhất là kết luận quá sớm, chẳng hạn gọi payment service là root cause chỉ vì span của nó dài nhất. Lỗi thứ hai là đính kèm quá nhiều dữ liệu không liên quan khiến developer không tìm thấy signal quan trọng. Evidence tốt phải có timestamp, correlation id, expected behavior và một bước điều tra tiếp theo.
 
 ## Tổng kết
 

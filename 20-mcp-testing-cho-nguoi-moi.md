@@ -85,39 +85,34 @@ Kiểm tra permission, data isolation, confirmation trước hành động rủi
 
 Nếu muốn làm quen API trước khi kiểm thử tool, hãy thực hành với [API Testing cơ bản](/courses/api-testing-co-ban), sau đó xem [Hướng dẫn API Testing cho người mới](/blogs/huong-dan-api-testing-cho-nguoi-moi). MCP server thường được hiểu dễ hơn khi tester đã quen request, response, status code và schema.
 
-![Wide 21:9 beginner learning roadmap for MCP testing across seven days. Seven compact cards arranged left to right with blue arrows: 'Ngày 1 Tool', 'Ngày 2 Happy path', 'Ngày 3 Invalid case', 'Ngày 4 Log', 'Ngày 5 Timeout', 'Ngày 6 Permission', 'Ngày 7 Bug report'. Use a small flat icon per card, amber milestone dots, clear Vietnamese labels, no paragraphs. Minimalist flat vector UI design, premium professional EdTech editorial artwork, clean horizontal bento-grid, Paper White #fafafa background, Zinc-900 #18181b, T5Edu Blue #1a73e8, Amber #f59e0b, subtle one-pixel borders, restrained liquid-glass layers, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/YkGtlnlRRrpeMoVs.png)
+## Chuyển kết quả kiểm thử thành evidence có thể review
 
-## Bắt đầu MCP testing bằng một mini project trong 7 ngày
+Một MCP test chỉ có giá trị khi người khác hiểu được vì sao nó pass hoặc fail. Vì vậy, sau mỗi lần chạy, hãy lưu bốn nhóm evidence: user goal, tool call thực tế, dữ liệu tool trả về và câu trả lời cuối của agent. Nếu có hành động gây thay đổi dữ liệu, cần thêm confirmation step và trạng thái trước, sau hành động.
 
-Một fresher không cần dựng hệ thống AI lớn để học. Hãy chọn một MCP server demo có tool đọc dữ liệu an toàn, chẳng hạn tìm sản phẩm hoặc xem trạng thái đơn giả lập. Mục tiêu tuần đầu là tạo được test plan, không phải xây agent hoàn hảo.
-
-| Ngày | Việc thực hành | Kết quả đầu ra |
+| Evidence | Cần ghi gì | Dùng để phát hiện lỗi nào |
 | --- | --- | --- |
-| 1 | Đọc architecture và liệt kê tool | Bảng tool, input, output, permission |
-| 2 | Viết happy path | 5 testcase có expected result |
-| 3 | Viết invalid và boundary case | Test thiếu field, sai type, data rỗng |
-| 4 | Ghi lại tool call | Log gồm name, arguments, response |
-| 5 | Kiểm tra timeout và retry | Quy tắc fallback rõ ràng |
-| 6 | Kiểm tra permission | Matrix user role và action |
-| 7 | Viết bug report và test summary | Một báo cáo có evidence |
+| User goal | Ý định ban đầu, role và context | Agent hiểu sai yêu cầu |
+| Tool call | Tên tool, arguments, thứ tự gọi | Chọn nhầm tool, gọi thừa |
+| Tool result | Status, schema, data chính | Tool lỗi hoặc AI đọc sai |
+| Final response | Nội dung trả lời và action đã xác nhận | Hallucination, báo thành công giả |
+| Security context | Permission, confirmation, data scope | Lộ dữ liệu hoặc vượt quyền |
 
-Trong ngày 4, tester có thể dùng cách tiếp cận giống khi học automation: không chỉ nhìn UI mà lưu evidence có thể lặp lại. Nếu làm với Playwright, tài liệu [Playwright Test Agents](https://playwright.dev/docs/test-agents) hiện mô tả planner, generator và healer, trong đó planner tạo test plan, generator tạo file test và healer hỗ trợ xử lý test fail. Đây là ví dụ tốt để phân biệt “AI hỗ trợ tạo test” với “tester chịu trách nhiệm xác minh test”.
+![Wide 21:9 educational evidence matrix for MCP testing. Show five horizontal evidence cards labeled exactly 'User goal', 'Tool call', 'Tool result', 'Final response', and 'Security context', connected by blue arrows into a right-side card labeled 'Reviewable test result'. Each card has a distinct flat icon and one short Vietnamese descriptor, with an amber shield on Security context. Minimalist flat vector UI design, premium professional EdTech editorial artwork, clean horizontal bento-grid, Paper White #fafafa background, Zinc-900 #18181b, T5Edu Blue #1a73e8, Amber #f59e0b, subtle one-pixel borders, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/ivfmdShDfShHAaRU.png)
 
 <dropdown-content>
-Làm sao biết một MCP test đang đủ tốt?
-> Một testcase đủ tốt khi người khác có thể chạy lại, biết input, biết tool call mong đợi, biết evidence cần lưu và biết điều kiện pass hoặc fail.
+Khi nào cần human confirmation trước tool call?
+> Cần confirmation khi tool tạo external side effect như gửi email, hoàn tiền, xóa dữ liệu, thay đổi quyền hoặc cập nhật bản ghi quan trọng. Với tool chỉ đọc dữ liệu, vẫn phải kiểm tra permission nhưng thường không cần thêm bước xác nhận.
 ```markdown
-Checklist review:
-- Scenario có user goal cụ thể chưa?
-- Tool mong đợi và tool thực tế có được ghi lại không?
-- Có kiểm tra input schema và output schema không?
-- Expected result có dựa trên rule hoặc data độc lập không?
-- Có negative case, timeout và permission case không?
-- Evidence có đủ để developer reproduce không?
+Review trước khi cho phép hành động:
+- Tool có đúng với user goal không?
+- User role có quyền trên resource này không?
+- Input có đúng resource và phạm vi dữ liệu không?
+- Agent đã hiển thị hành động sắp thực hiện chưa?
+- Kết quả sau hành động có được kiểm tra độc lập không?
 ```
 </dropdown-content>
 
-Đừng bắt đầu bằng việc đánh giá câu trả lời theo cảm nhận. Hãy bắt đầu bằng một scenario nhỏ, expected result rõ và log đầy đủ. Khi nền tảng đã ổn, tester mới mở rộng sang multi-tool workflow, memory, prompt injection và đánh giá chất lượng câu trả lời.
+Khi có evidence như trên, bug report sẽ cụ thể hơn: agent chọn sai tool ở bước nào, argument nào sai, tool trả dữ liệu gì và câu trả lời cuối đã lệch khỏi rule nào. Đó là cách biến MCP testing từ việc đọc một đoạn text thành kiểm thử một workflow có thể audit.
 
 ## Tổng kết
 
