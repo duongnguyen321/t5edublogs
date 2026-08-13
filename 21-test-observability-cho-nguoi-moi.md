@@ -53,7 +53,7 @@ So sánh metric theo thời điểm, môi trường, browser, branch và version
 
 Nguyên tắc quan trọng là không gọi mọi lỗi test là flaky. Flaky test là test có cùng code và cùng điều kiện nhưng kết quả không ổn định. Nếu môi trường hoặc dependency thay đổi, tester cần ghi rõ context thay vì dùng nhãn flaky quá sớm.
 
-Nếu bạn đang học automation với Playwright, bài [Khắc Phục Flaky Test Trong Automation](/blogs/khac-phuc-flaky-test-trong-automation) là nền tảng phù hợp để nối khái niệm ổn định test với evidence khi debug. Bạn cũng có thể xem [Playwright với TypeScript cơ bản cho Tester](/blogs/playwright-voi-typescript-co-ban-cho-tester) để luyện cách tạo test step rõ ràng.
+Nếu bạn đang học automation với Playwright, bài [Cách Khắc Phục Flaky Test Cho SDET](/blogs/cach-khac-phuc-flaky-test-cho-sdet) là nền tảng phù hợp để nối khái niệm ổn định test với evidence khi debug. Bạn cũng có thể xem [Playwright với TypeScript cơ bản cho Tester](/blogs/playwright-voi-typescript-co-ban-cho-tester) để luyện cách tạo test step rõ ràng.
 
 ## Bắt đầu thu thập logs, metrics và traces từ đâu
 
@@ -131,5 +131,5 @@ Hãy tránh hai lỗi khi viết report. Lỗi thứ nhất là kết luận qu�
 - Test observability nối test runner với logs, metrics và traces để tester hiểu root cause thay vì chỉ thấy pass hoặc fail.
 - Người mới nên bắt đầu với một journey, một trace id và một dashboard nhỏ, không bật mọi signal cùng lúc.
 - Testcase cần định nghĩa evidence ngay từ đầu, đồng thời mask data nhạy cảm và tránh log thừa.
-- Nếu bạn thường gặp test fail khó giải thích, hãy học [Khắc Phục Flaky Test Trong Automation](/blogs/khac-phuc-flaky-test-trong-automation) rồi thực hành với [API Testing cơ bản](/courses/api-testing-co-ban).
+- Nếu bạn thường gặp test fail khó giải thích, hãy học [Cách Khắc Phục Flaky Test Cho SDET](/blogs/cach-khac-phuc-flaky-test-cho-sdet) rồi thực hành với [API Testing cơ bản](/courses/api-testing-co-ban).
 - Khi một test fail lần tới, bạn sẽ kiểm tra log, metric hay trace trước, và vì sao?

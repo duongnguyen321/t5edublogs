@@ -6,7 +6,7 @@
 
 ## MCP testing là gì và vì sao tester mới nên quan tâm
 
-MCP testing là cách kiểm thử các hệ thống dùng Model Context Protocol, một open-source standard kết nối ứng dụng AI với data source, tool và workflow bên ngoài. Tài liệu chính thức của [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) ví MCP như cổng USB-C cho AI: ứng dụng AI có thể khám phá và sử dụng công cụ theo một cách thống nhất hơn thay vì mỗi integration dùng một quy ước riêng.
+MCP testing là cách kiểm thử các hệ thống dùng Model Context Protocol, một open-source standard kết nối ứng dụng AI với data source, tool và workflow bên ngoài. Tài liệu chính thức của [Model Context Protocol](https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro) ví MCP như cổng USB-C cho AI: ứng dụng AI có thể khám phá và sử dụng công cụ theo một cách thống nhất hơn thay vì mỗi integration dùng một quy ước riêng.
 
 Với tester mới, điểm quan trọng không phải là học thuộc protocol ngay lập tức. Điều cần hiểu trước là hệ thống giờ có thêm một lớp giao tiếp giữa AI client, MCP server và tool thật. Một câu trả lời trông hợp lý vẫn có thể sai nếu AI chọn nhầm tool, truyền thiếu tham số, vượt quyền hoặc báo đã hoàn thành dù hành động chưa xảy ra.
 
@@ -22,7 +22,7 @@ Trong thực tế, tester có thể gặp MCP ở ba vị trí. Thứ nhất là
 | Result handling | AI có hiểu đúng kết quả không? | Kết quả rỗng có bị diễn giải thành đã giao hàng không? |
 | Permission | AI có bị giới hạn quyền không? | User chỉ được xem đơn, không được hoàn tiền |
 
-Nếu chưa vững nền tảng, bạn có thể bắt đầu từ [khóa Testing cơ bản](/courses/testing-co-ban) và ôn lại cách viết testcase trong bài [Tester Mới Sai Lầm Ở Đâu Khi Viết Test Case](/blogs/sai-lam-cua-tester-moi-khi-viet-test-case). Hai kỹ năng này vẫn là foundation trước khi thêm AI vào quy trình.
+Nếu chưa vững nền tảng, bạn có thể bắt đầu từ [khóa Testing cơ bản](/courses/testing-co-ban) và ôn lại cách viết testcase trong bài [Tester Mới Sai Lầm Ở Đâu Khi Viết Test Case](/blogs/tester-moi-sai-lam-o-dau-khi-viet-test-case). Hai kỹ năng này vẫn là foundation trước khi thêm AI vào quy trình.
 
 <multiple-choice correct="C" select="single">
 Một AI assistant gọi tool tìm đơn hàng nhưng trả lời rằng đơn đã được giao dù tool trả về trạng thái `processing`. Lớp nào cần kiểm tra trước?
