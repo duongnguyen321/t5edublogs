@@ -1,4 +1,4 @@
-# Xây pipeline kiểm thử AI với OpenTelemetry: từ trace đến regression
+# Hướng dẫn xây pipeline kiểm thử AI với OpenTelemetry
 
 > Một hướng dẫn thực hành giúp QA engineer và developer instrument AI app, xuất telemetry qua OTLP, đặt baseline cho latency và token, bảo vệ dữ liệu nhạy cảm rồi dùng trace để triage lỗi thay vì chỉ nhìn câu trả lời cuối.
 
