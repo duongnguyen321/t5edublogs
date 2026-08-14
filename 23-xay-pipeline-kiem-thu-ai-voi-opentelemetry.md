@@ -1,6 +1,6 @@
-# Hướng dẫn xây pipeline kiểm thử AI với OpenTelemetry
+# Xây pipeline kiểm thử AI với OpenTelemetry
 
-> Một hướng dẫn thực hành giúp QA engineer và developer instrument AI app, xuất telemetry qua OTLP, đặt baseline cho latency và token, bảo vệ dữ liệu nhạy cảm rồi dùng trace để triage lỗi thay vì chỉ nhìn câu trả lời cuối.
+> ai testing, opentelemetry, test observability, qa beginner
 
 ![Square editorial cover showing a QA engineer's AI testing pipeline with an AI application on the left, an OpenTelemetry trace tree in the center, and a regression dashboard on the right. Show three concise labels exactly Trace, Metric, and Event. Minimalist flat vector UI design. Premium professional EdTech editorial artwork. Clean bento-grid composition with strong negative space. Paper White background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders and restrained liquid-glass layers. Simple geometric icons, crisp edges, professional engineering documentation style. No people, no faces, no hands, no photorealism, no 3D, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/pCGZzBZODMnnCWfH.png)
 
@@ -35,7 +35,7 @@ Pipeline tối thiểu cho một AI test run
 ```
 </grid-content>
 
-Bạn có thể đọc thêm [Test observability cho người mới](/blogs/test-observability-cho-nguoi-moi). Phần còn lại tập trung vào cách biến telemetry thành một phần của quy trình test AI.
+Bạn có thể đọc thêm [Cách khắc phục flaky test cho SDET](/blogs/cach-khac-phuc-flaky-test-cho-sdet) để phân biệt flaky signal với regression thật. Phần còn lại tập trung vào cách biến telemetry thành một phần của quy trình test AI.
 
 ![Wide 21:9 architecture diagram showing an AI test pipeline from Test scenario to AI application to OpenTelemetry SDK to OTLP Collector to Observability backend and Evaluation report. Use blue arrows left to right, an amber governance checkpoint at the Collector, and concise labels exactly Kịch bản test, AI app, OTel SDK, Collector, Backend, and Evaluation. Minimalist flat vector UI design. Premium professional EdTech editorial artwork. Clean horizontal bento-grid composition with strong negative space. Paper White background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders. No people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/muufTACIYcLMKlCU.png)
 
@@ -104,9 +104,7 @@ test('order agent uses the lookup tool and returns a safe status', async ({ page
 
 Đây là ví dụ UI assertion. Trong hệ thống thật, telemetry contract thường được kiểm tra ở service hoặc test harness riêng, vì trace backend có thể xuất hiện trễ hơn response. Không nên để UI test phụ thuộc cứng vào dashboard. Hãy lấy trace ID từ response header, test context hoặc correlation field rồi truy vấn telemetry bằng một bước kiểm tra có timeout hợp lý.
 
-<table-testcase>
-| Lớp testcase | Expected result | Evidence khi fail |
-| --- | --- | --- |
+<table-testcase cols="3" rows="4" headers="Lớp testcase|Expected result|Evidence khi fail">
 | Behavior | Tool đúng được gọi với input hợp lệ | Tool span và arguments đã mask |
 | Quality | Output đúng rubric, không lộ dữ liệu | Evaluation output và response đã mask |
 | Telemetry | Có root span, model span và trace ID | Trace query và span attributes |
@@ -197,6 +195,3 @@ Nếu AI app còn là prototype một endpoint, bạn có thể bắt đầu b�
 - Redaction, sampling và retention nên được áp dụng trước nơi lưu trữ, đặc biệt khi capture prompt hoặc tool result.
 - Nếu team của bạn đã có AI app, hãy chọn một journey có tool call và thiết kế telemetry contract cho journey đó trước khi mở rộng sang toàn hệ thống.
 
-## Hashtag
-
-opentelemetry, genai, aitesting, observability, softwaretesting
