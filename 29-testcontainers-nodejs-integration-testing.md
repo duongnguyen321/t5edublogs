@@ -1,12 +1,12 @@
-testcontainers, nodejs-testing, integration-testing, postgresql, qa-automation
-
 # Testcontainers Node.js: Integration Testing Với Dependency Thật
 
-![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 1:1 square cover for a Testcontainers Node.js integration testing deep dive, clean bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, Node.js test runner connected to an isolated PostgreSQL container through a blue orchestration layer, shield labeled "Integration test" and amber badge labeled "Real dependency", simple geometric flat icons, crisp short English labels only, subtle one-pixel borders and restrained liquid-glass layers, no gradients, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/pYFXupNtHmEZKYBs.png)
+> Testcontainers Node.js giúp QA và developer chạy integration test với PostgreSQL, Redis hoặc service thật trong container disposable, giảm khoảng cách giữa test environment và production mà vẫn giữ được isolation.
+
+![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 1:1 square cover illustration of an experienced QA engineer's abstract testing workspace showing a Node.js test runner connected to a disposable PostgreSQL container, with a blue shield labeled Integration test and an amber badge labeled Real dependency. Clean bento-grid composition with strong negative space. Paper White or Zinc-50 background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders and restrained liquid-glass layers. Simple flat icons, geometric shapes, crisp short Vietnamese labels exactly Integration test, Real dependency, Cleanup, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/pYFXupNtHmEZKYBs.png)
 
 ## Testcontainers Node.js giải quyết khoảng trống nào của integration testing?
 
-Bài này dành cho automation tester, QA engineer và developer đã có nền tảng TypeScript hoặc JavaScript async-await, Jest hoặc test runner tương đương, Docker, SQL/PostgreSQL và phân biệt được unit test, integration test với end-to-end test. Nếu bạn chưa biết các khái niệm đó, hãy bắt đầu từ [khóa học Tester và QA trên T5Edu](https://t5edu.site/courses) và các [bài blog testing nền tảng](https://t5edu.site/blogs) trước khi triển khai.
+Bài này dành cho automation tester, QA engineer và developer đã có nền tảng TypeScript hoặc JavaScript async-await, Jest hoặc test runner tương đương, Docker, SQL/PostgreSQL và phân biệt được unit test, integration test với end-to-end test. Nếu bạn chưa biết các khái niệm đó, hãy bắt đầu từ [khóa học Tester và QA trên T5Edu](/courses) và các [bài blog testing nền tảng](/blogs) trước khi triển khai.
 
 **Testcontainers Node.js** là thư viện tạo và điều khiển container tạm thời trong lúc test chạy. Thay vì thay database bằng mock hoặc dùng một database dùng chung trên máy dev, test có thể khởi động PostgreSQL thật, lấy connection URI được map ra host, chạy assertion rồi dừng và dọn container theo lifecycle đã cấu hình. Trang [Testcontainers chính thức](https://testcontainers.com/) mô tả mô hình này là các instance nhẹ, dùng một lần cho database, browser và nhiều dependency khác.
 
@@ -76,7 +76,7 @@ describe('customer repository integration', () => {
 
 [Hướng dẫn chính thức của Docker cho Testcontainers Node.js](https://docs.docker.com/guides/testcontainers-nodejs-getting-started/) dùng chính flow này: start `PostgreSqlContainer`, lấy connection URI, tạo client, chạy test với PostgreSQL thật và stop container ở `afterAll`. Guide cũng lưu ý lần chạy đầu có thể cần thời gian pull image, nên timeout phải phản ánh chi phí khởi động thật thay vì coi mọi timeout là lỗi application.
 
-![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide section image for a Testcontainers Node.js lifecycle, clean horizontal bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, Node.js test runner above and PostgreSQL container below, five connected cards arranged left-to-right with solid blue arrows labeled "Declare", "Start", "Ready", "Exercise", and "Cleanup", amber gate labeled "Wait strategy" between Start and Ready, short English labels only, subtle one-pixel borders and restrained liquid-glass layers, no gradients, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/XMseGimELPfwCWxb.png)
+![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide technical diagram of a Testcontainers Node.js lifecycle from left to right. Five connected cards labeled exactly Declare, Start, Ready, Exercise, and Cleanup, with a Node.js test runner above and a PostgreSQL container below. Use solid blue arrows between lifecycle steps and an amber gate labeled Wait strategy between Start and Ready. Clean horizontal bento-grid composition with strong negative space. Paper White or Zinc-50 background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders and restrained liquid-glass layers. Exact short Vietnamese labels only where needed, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/XMseGimELPfwCWxb.png)
 
 ## Vì sao “container đã start” chưa có nghĩa database đã ready?
 
@@ -118,7 +118,7 @@ Không có một loại test environment đúng cho mọi tầng. Unit test nên
 
 Dùng Testcontainers không có nghĩa là bỏ mock. Một repository có thể được kiểm tra bằng unit test với mock để bao phủ nhánh logic, sau đó có một nhóm integration test nhỏ với PostgreSQL thật để xác nhận query, schema và mapping. Hai lớp test trả lời hai câu hỏi khác nhau.
 
-Nếu bạn cần củng cố cách viết query gắn với rule nghiệp vụ, hãy xem [khóa học và nội dung Tester trên T5Edu](https://t5edu.site/courses), sau đó dùng Testcontainers để kiểm tra chính rule đó trên database thật. Đừng bắt đầu bằng việc tạo một container cho mọi test case nếu chưa biết test nào đang bảo vệ integration boundary.
+Nếu bạn cần củng cố cách viết query gắn với rule nghiệp vụ, hãy xem [khóa học và nội dung Tester trên T5Edu](/courses), sau đó dùng Testcontainers để kiểm tra chính rule đó trên database thật. Đừng bắt đầu bằng việc tạo một container cho mọi test case nếu chưa biết test nào đang bảo vệ integration boundary.
 
 ## Làm isolation và cleanup thế nào để suite đáng tin cậy?
 
@@ -135,7 +135,9 @@ Cleanup phải dọn cả client connection lẫn container. Nếu chỉ stop co
 | INT04 | Image drift | Local pass, CI fail sau một thời gian | Pin image tag và ghi nhận version trong log |
 </table-testcase>
 
-![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide section image comparing integration testing strategies, clean horizontal bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, three columns labeled "Mock", "Shared DB", and "Testcontainers", simple stub icon in Mock, amber warning around shared data in Shared DB, blue isolated PostgreSQL container in Testcontainers, bottom decision strip labeled "Unit", "Integration", and "E2E" with arrows, short English labels only, subtle one-pixel borders and restrained liquid-glass layers, no gradients, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/UddHWlkTxFgSDIsn.png)
+![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide integration testing comparison illustration with three columns labeled exactly Mock, Shared DB, and Testcontainers. Show a blue isolated container around a real PostgreSQL icon in the Testcontainers column, an amber warning around shared data in Shared DB, and a simple stub icon in Mock. Add a bottom decision strip labeled Unit, Integration, and E2E with arrows to the preferred approach. Clean horizontal bento-grid composition with strong negative space. Paper White or Zinc-50 background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders and restrained liquid-glass layers. Exact short English labels only, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/UddHWlkTxFgSDIsn.png)
+
+![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide technical illustration for a Vietnamese T5Edu blog about Testcontainers Node.js integration testing. Show three horizontal isolation lanes labeled exactly Test, Container, and Cleanup. In the center lane, a blue Node.js test runner connects to a disposable PostgreSQL container with a small amber shield labeled Isolated. Add blue arrows from Start to Ready to Exercise to Cleanup, with a compact amber readiness gate between Start and Ready. Paper White or Zinc-50 background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, subtle one-pixel borders, restrained liquid-glass layers, clean bento-grid composition, strong negative space, flat geometric icons. Exact short English labels only. No people, no faces, no hands, no purple, no violet, no pink, no neon, no photorealism, no 3D, no glossy plastic, no dramatic lighting, no logo, no watermark, no dense paragraphs](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/VMEbHCGsMqmVoxCj.png)
 
 ## Khi nào Testcontainers không phải lựa chọn tốt?
 
@@ -159,7 +161,7 @@ Bắt đầu bằng một integration boundary có rủi ro thật, chẳng hạ
 
 Một suite tốt không phải suite có nhiều container nhất. Đó là suite mà mỗi test nói rõ dependency nào cần thật, dữ liệu nào được chuẩn bị, readiness nào được kiểm tra, cleanup nào được thực hiện và failure evidence nằm ở đâu. Khi một test đỏ, developer phải biết lỗi nằm ở query, schema, service readiness hay Docker trước khi sửa code ngẫu nhiên.
 
-Nếu team đang học theo JavaScript hoặc TypeScript, [khóa học JavaScript cho QA trên T5Edu](https://t5edu.site/courses/javascript-cho-qa-engineer) giúp củng cố async-await và xử lý data trước khi bạn tổ chức fixture. Khi đã có integration test chạy ổn định, hãy dùng [blog testing của T5Edu](https://t5edu.site/blogs) để ghi lại decision về mock, dependency thật và mức isolation cho team.
+Nếu team đang học theo JavaScript hoặc TypeScript, [khóa học JavaScript cho QA trên T5Edu](/courses/javascript-cho-qa-engineer) giúp củng cố async-await và xử lý data trước khi bạn tổ chức fixture. Khi đã có integration test chạy ổn định, hãy dùng [blog testing của T5Edu](/blogs) để ghi lại decision về mock, dependency thật và mức isolation cho team.
 
 ## Tổng kết
 
@@ -168,6 +170,8 @@ Nếu team đang học theo JavaScript hoặc TypeScript, [khóa học JavaScrip
 - Mock, shared database và Testcontainers phục vụ các lớp kiểm thử khác nhau. Hãy chọn theo boundary và tín hiệu cần kiểm tra.
 - Pin image version, reset dữ liệu, tránh tên và cổng cố định, đóng client rồi stop container để suite có thể tái hiện trong local và CI.
 
-Nếu bạn đã có nền tảng Docker, TypeScript và database testing, hãy học thêm [nội dung QA và Tester theo khóa học](https://t5edu.site/courses) rồi chọn một repository boundary để chuyển từ mock sang PostgreSQL thật. Dependency nào trong hệ thống của bạn đang tạo rủi ro lớn nhất nếu chỉ test bằng mock?
+Nếu bạn đã có nền tảng Docker, TypeScript và database testing, hãy học thêm [nội dung QA và Tester theo khóa học](/courses) rồi chọn một repository boundary để chuyển từ mock sang PostgreSQL thật. Dependency nào trong hệ thống của bạn đang tạo rủi ro lớn nhất nếu chỉ test bằng mock?
 
+## Hashtag
 
+> testcontainers, nodejs-testing, integration-testing, postgresql, qa-automation
