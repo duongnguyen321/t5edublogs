@@ -136,5 +136,4 @@ Nếu muốn luyện cách phân tích case trước khi viết report, hãy xem
 Nếu bạn là tester mới và muốn xây nền tảng từ requirement đến test case và bug report, hãy học [khóa Testing cơ bản](https://t5edu.site/courses/testing-co-ban). Câu hỏi tự đánh giá: nếu developer chỉ có report của bạn mà không có cuộc gọi bổ sung, họ có thể chạy lại lỗi không?
 
 ## Hashtag
-
-> ai testing, bug report, manual testing, tester moi, QA
+> ai testing, bug report, manual testing, tester moi, qa

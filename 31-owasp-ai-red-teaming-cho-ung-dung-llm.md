@@ -137,5 +137,4 @@ Nếu finding liên quan đến secret, user data hoặc khả năng thực thi 
 Nếu bạn đã có nền tảng API testing và muốn thiết kế pipeline quan sát cho hệ thống AI, hãy xem [bài xây pipeline kiểm thử AI với OpenTelemetry](https://t5edu.site/blogs/xay-pipeline-kiem-thu-ai-voi-opentelemetry) và [khóa API Testing nâng cao](https://t5edu.site/courses/api-testing-nang-cao). Câu hỏi mở: trong LLM app bạn đang kiểm thử, trust boundary nào chưa có evidence để chứng minh khi bị tấn công?
 
 ## Hashtag
-
-> ai red teaming, AI testing, LLM security, prompt injection, QA testing
+> ai red teaming, ai testing, llm security, prompt injection, qa testing
