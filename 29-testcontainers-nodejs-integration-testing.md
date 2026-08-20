@@ -241,21 +241,24 @@ Nếu container không start, image pull fail hoặc readiness timeout, ưu tiê
 
 ## Thiết kế một suite Testcontainers Node.js có giá trị thế nào?
 
-Bắt đầu bằng một integration boundary có rủi ro thật, chẳng hạn repository lưu customer vào PostgreSQL.
+Bắt đầu bằng một integration boundary có rủi ro thật, chẳng hạn repository lưu customer vào PostgreSQL. Sau đó chọn test theo ma trận sau:
 
-Viết một test happy path để xác nhận kết nối và mapping, một test negative cho constraint, rồi một test về transaction hoặc query quan trọng.
+| Loại test | Mục tiêu | Tín hiệu cần kiểm tra |
+|---|---|---|
+| Happy path | Xác nhận kết nối và mapping | Record được lưu và đọc đúng |
+| Negative | Kiểm tra constraint hoặc input lỗi | Error message và trạng thái transaction |
+| Transaction/query | Bảo vệ logic quan trọng | Rollback, isolation hoặc query result |
 
-Sau đó đo thời gian setup, tỷ lệ fail do environment và khả năng chạy độc lập.
+Trước khi mở rộng suite, hãy kiểm tra bốn điểm:
 
-Một suite tốt không phải suite có nhiều container nhất.
+- Thời gian setup có chấp nhận được không?
+- Test có fail do environment nhiều hơn do behavior không?
+- Mỗi test có chạy độc lập không?
+- Failure evidence có chỉ ra query, schema, readiness hay Docker không?
 
-Đó là suite mà mỗi test nói rõ dependency nào cần thật, dữ liệu nào được chuẩn bị, readiness nào được kiểm tra, cleanup nào được thực hiện và failure evidence nằm ở đâu.
+Một suite tốt không phải suite có nhiều container nhất. Đó là suite mà dependency thật, dữ liệu, readiness, cleanup và evidence đều được nói rõ trong từng test.
 
-Khi một test đỏ, developer phải biết lỗi nằm ở query, schema, service readiness hay Docker trước khi sửa code ngẫu nhiên.
-
-Nếu team đang học theo JavaScript hoặc TypeScript, [khóa học JavaScript cho QA trên T5Edu](/courses/javascript-cho-qa-engineer) giúp củng cố async-await và xử lý data trước khi bạn tổ chức fixture.
-
-Khi đã có integration test chạy ổn định, hãy dùng [blog testing của T5Edu](/blogs) để ghi lại decision về mock, dependency thật và mức isolation cho team.
+Nếu team đang học JavaScript hoặc TypeScript, [khóa học JavaScript cho QA trên T5Edu](/courses/javascript-cho-qa-engineer) giúp củng cố async-await và xử lý data trước khi tổ chức fixture. Khi integration test đã ổn định, hãy dùng [blog testing của T5Edu](/blogs) để ghi lại decision về mock, dependency thật và mức isolation.
 
 ## Tổng kết
 

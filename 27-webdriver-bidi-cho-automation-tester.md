@@ -8,7 +8,16 @@
 
 Bài này dành cho automation tester hoặc QA engineer đã biết WebDriver session, locator, assertion, HTTP cơ bản và JavaScript hoặc TypeScript async/await.
 
-Reader outcome là sau khi đọc, tester có thể phân tích một use case cần lắng nghe browser event, chọn module BiDi phù hợp, bật khả năng BiDi trong Selenium và xây một test strategy không nhầm protocol capability với wrapper API.
+Sau bài này, tester cần đạt được các outcome sau:
+
+| Outcome | Bằng chứng đầu ra |
+|---|---|
+| Phân tích use case | Chỉ ra khi nào cần lắng nghe browser event |
+| Chọn module | Ghép nhu cầu với module BiDi phù hợp |
+| Bật capability | Cấu hình khả năng BiDi trong Selenium |
+| Thiết kế strategy | Tách protocol capability khỏi wrapper API |
+
+**Prerequisite:** đã biết WebDriver session, locator, assertion, HTTP cơ bản và JavaScript hoặc TypeScript async/await.
 
 WebDriver classic thường được hiểu qua chuỗi client gửi request rồi chờ browser trả response. Mô hình này phù hợp với thao tác như navigate, find element và click.
 

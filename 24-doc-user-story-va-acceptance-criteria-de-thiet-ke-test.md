@@ -164,7 +164,11 @@ Nếu scenario không liên hệ được với user story, acceptance criteria 
 
 Không rõ yêu cầu không có nghĩa tester phải im lặng hoặc tự quyết định. Hãy biến điểm mơ hồ thành câu hỏi có bối cảnh, tác động và đề xuất kiểm chứng.
 
-Thay vì hỏi “Tính năng này hoạt động thế nào?”, hãy hỏi: “Ở AC4, sản phẩm ngừng bán không thể thêm vào danh sách. Hệ thống cần ẩn biểu tượng, vô hiệu hóa nút hay hiển thị thông báo sau khi người dùng bấm?”
+Hãy chuyển câu hỏi chung thành câu hỏi có bối cảnh:
+
+| Câu hỏi chung | Câu hỏi có thể kiểm chứng |
+|---|---|
+| Tính năng này hoạt động thế nào? | Ở AC4, sản phẩm ngừng bán không thể thêm vào danh sách. Hệ thống cần ẩn biểu tượng, vô hiệu hóa nút hay hiển thị thông báo sau khi user bấm? |
 
 Câu hỏi cụ thể giúp product owner, BA và developer trả lời nhanh hơn. Nó cũng tạo dấu vết để team hiểu vì sao scenario được thiết kế theo cách đó.
 
@@ -222,7 +226,14 @@ Tester có thể đưa ra giả định để thảo luận, nhưng không nên 
 - Scenario nên bao gồm luồng đúng, luồng không hợp lệ và trường hợp biên phù hợp với scope.
 - Khi yêu cầu mơ hồ, câu hỏi cụ thể có giá trị hơn một test case được xây trên suy đoán.
 
-Nếu bạn đang học testing, hãy chọn một ticket nhỏ, đánh dấu bốn thành phần “ai, hành động, mục tiêu, phạm vi”, rồi viết ba scenario có liên kết rõ với acceptance criteria. Bạn thấy phần nào trong ticket hiện tại vẫn chưa đủ rõ để có thể kết luận pass hoặc fail?
+Nếu đang học testing, hãy làm theo checklist này:
+
+1. Chọn một ticket nhỏ.
+2. Đánh dấu bốn thành phần: ai, hành động, mục tiêu và phạm vi.
+3. Viết ba scenario liên kết rõ với acceptance criteria.
+4. Ghi lại phần còn thiếu để team có thể kết luận pass hoặc fail.
+
+Câu hỏi tự kiểm tra: phần nào trong ticket hiện tại vẫn chưa đủ rõ để kết luận pass hoặc fail?
 
 ## Hashtag
 > user story, acceptance criteria, test scenario, manual testing, software testing

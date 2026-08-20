@@ -18,7 +18,14 @@ Tuy nhiên, một tester mới không cần học thuộc toàn bộ tiêu chu�
 
 Điểm bắt đầu phù hợp là xem một trang như một user đang cố hoàn thành tác vụ.
 
-Ví dụ, với form đăng nhập, tester cần trả lời: user có biết ô nào là email không, có thể đi đến nút Login chỉ bằng bàn phím không, khi nhập sai thì có hiểu lỗi nằm ở đâu không, và focus có bị che bởi một thanh cố định hay không.
+Với form đăng nhập, tester có thể bắt đầu bằng checklist sau:
+
+| Kiểm tra | Câu hỏi quan sát |
+|---|---|
+| Nhận diện field | User có biết ô nào là email không? |
+| Keyboard access | User có đi đến nút Login chỉ bằng bàn phím không? |
+| Error message | Khi nhập sai, user có hiểu lỗi nằm ở đâu không? |
+| Focus visibility | Focus có bị che bởi một thanh cố định không? |
 
 <multiple-choice correct="B" select="single">
 Một trang vượt qua công cụ scan tự động nhưng tester không thể đi đến nút Submit bằng bàn phím. Kết luận nào phù hợp nhất?

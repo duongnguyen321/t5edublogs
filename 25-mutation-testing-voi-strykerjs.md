@@ -4,13 +4,21 @@
 
 ![Square 1:1 educational editorial illustration for T5Edu about mutation testing with StrykerJS in a JavaScript and TypeScript project. Minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, subtle one-pixel borders, rounded cards. Show a split testing laboratory: on the left a clean TypeScript function card labeled exactly “Production code”, in the center a small mutation spark icon and three mutant cards labeled “Killed”, “Survived”, and “No coverage”, on the right a test report card labeled exactly “Mutation score”. Use short Vietnamese labels only, no long paragraphs, no vendor logo, no realistic terminal screenshot, no gradients, no 3D, no photorealism, no clutter.](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/SbQgCjoRBKDlzhnp.png)
 
-Code coverage thường là chỉ số đầu tiên team dùng để nói về mức độ bao phủ của test.
+Code coverage cho biết test đã đi qua bao nhiêu phần của code. Nó chưa cho biết test có phát hiện được thay đổi làm sai behavior hay không.
 
-Một file có 90% line coverage nhìn có vẻ an toàn, nhưng con số đó chưa trả lời được test suite có nhận ra một điều kiện bị đảo, một toán tử bị đổi hay một giá trị trả về bị sửa hay không.
+| Câu hỏi | Code coverage | Mutation testing |
+|---|---|---|
+| Đo điều gì? | Vùng code đã được chạy | Khả năng test phát hiện thay đổi sai |
+| Ví dụ rủi ro | 90% line coverage nhưng điều kiện chưa được kiểm tra đủ | Đảo điều kiện tạo mutant, test vẫn PASS |
+| Kết quả cần đọc | Coverage percentage | Killed, survived hoặc no coverage |
 
-**Mutation testing** tiếp cận câu hỏi theo hướng khác. Công cụ tạo những thay đổi nhỏ, có chủ đích trong production code, sau đó chạy test để xem test suite có làm một mutant thất bại hay không.
+Mutation testing tạo thay đổi nhỏ, có chủ đích trong production code rồi chạy test trên từng mutant. Nếu test thất bại, mutant bị **killed**; nếu test vẫn PASS, test suite có thể đang thiếu một assertion quan trọng.
 
-Bài viết này dành cho QA automation engineer, SDET và developer đã biết JavaScript hoặc TypeScript, unit test và CI.
+**Prerequisite của bài:**
+
+- Biết JavaScript hoặc TypeScript.
+- Đã viết unit test.
+- Biết cách chạy test trong CI.
 
 Mục tiêu là hiểu mental model của mutation testing và thiết kế một lần chạy StrykerJS có giá trị, không biến mutation score thành KPI mù quáng.
 

@@ -179,17 +179,18 @@ Nếu yêu cầu đổi màu nút đã được duyệt, screenshot mới đúng
 
 ## Người mới nên bắt đầu visual regression testing từ đâu?
 
-Hãy bắt đầu bằng một trang ít biến động và một mục tiêu nhỏ. Trong buổi đầu, tester có thể chọn login page, tạo dữ liệu cố định, chụp baseline và chạy lại để thấy một diff có chủ đích.
+Hãy bắt đầu theo lộ trình bốn bước:
 
-Trong buổi tiếp theo, thay đổi một thuộc tính CSS, quan sát actual image và viết bug report có component, viewport, expected result và evidence.
+| Bước | Việc cần làm | Evidence cần lưu |
+|---|---|---|
+| 1 | Chọn login page hoặc màn hình ít biến động, tạo dữ liệu cố định | URL, viewport và dữ liệu test |
+| 2 | Chụp baseline rồi chạy lại để tạo diff có chủ đích | Baseline và actual image |
+| 3 | Đổi một thuộc tính CSS, review diff và viết bug report | Component, expected result và evidence |
+| 4 | Mở rộng sang responsive layout, theme, component library hoặc nhiều browser | Ma trận màn hình và quyết định coverage |
 
-Đừng vội bảo vệ mọi route. Một visual test hữu ích là test mà team hiểu nó đang bảo vệ điều gì và có thể review khi nó fail.
+Đừng vội bảo vệ mọi route. Một visual test có giá trị phải có mục tiêu mà team hiểu và có thể review khi test fail.
 
-Sau khi đã quen với baseline và triage, bạn mới mở rộng sang responsive layout, theme, component library hoặc nhiều browser.
-
-Nếu bạn đang học foundation kiểm thử, hãy kết hợp bài này với [khóa học Tester và QA](/courses) thay vì chỉ học syntax của Playwright.
-
-Nếu muốn luyện tư duy theo câu hỏi và expected result, hãy bắt đầu từ [khu vực blog testing của T5Edu](/blogs) rồi chọn một màn hình nhỏ để tự thiết kế bảng testcase visual.
+Nếu đang học foundation kiểm thử, hãy kết hợp bài này với [khóa học Tester và QA](/courses). Khi muốn luyện tư duy theo câu hỏi và expected result, hãy bắt đầu từ [khu vực blog testing của T5Edu](/blogs) rồi thiết kế một bảng testcase visual cho màn hình nhỏ.
 
 ## Tổng kết
 
