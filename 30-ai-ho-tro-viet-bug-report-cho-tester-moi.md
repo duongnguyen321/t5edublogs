@@ -6,11 +6,18 @@
 
 ## Vì sao bug report là kỹ năng nền tảng quan trọng với tester mới?
 
-Bug report là tài liệu mô tả một hành vi không phù hợp của phần mềm, cách tái hiện và bằng chứng để developer có thể kiểm tra lại. Với tester mới, viết được một report rõ ràng quan trọng hơn việc biết thật nhiều tool, vì report là đầu ra trực tiếp mà team dùng để triage, sửa lỗi và quyết định release.
+Bug report là tài liệu để developer kiểm tra lại một hành vi bất thường. Một report rõ ràng giúp team triage, sửa lỗi và quyết định release.
 
-Một report tốt không chỉ nói “nút không hoạt động”. Nó trả lời bốn câu hỏi: tester đã ở trạng thái nào, đã làm chính xác gì, phần mềm thực tế phản hồi ra sao và kết quả nào được mong đợi. [Hướng dẫn bug report của QA Wolf](https://www.qawolf.com/blog/what-makes-a-great-bug-report) nhấn mạnh expected và actual result, bước reproduce, bằng chứng hình ảnh cùng log kỹ thuật là các thành phần cốt lõi.
+| Report cần trả lời | Ví dụ câu hỏi |
+| --- | --- |
+| Known state | Tester bắt đầu từ trạng thái nào? |
+| Action | Tester đã làm chính xác gì? |
+| Actual result | Phần mềm đã phản hồi ra sao? |
+| Expected result | Kết quả nào cần xảy ra? |
 
-Nếu đang học nghề, tester nên củng cố các khái niệm trong [khóa Testing cơ bản](https://t5edu.site/courses/testing-co-ban) trước khi dùng AI để viết. AI chỉ giúp diễn đạt thông tin đã thu thập, không tạo ra sự thật thay cho việc interact với sản phẩm.
+[Hướng dẫn bug report của QA Wolf](https://www.qawolf.com/blog/what-makes-a-great-bug-report) cũng nhấn mạnh steps to reproduce, expected/actual result và evidence.
+
+Nếu đang học nghề, hãy củng cố kiến thức trong [khóa Testing cơ bản](https://t5edu.site/courses/testing-co-ban). AI chỉ sắp xếp thông tin đã thu thập, không thay tester tương tác và kiểm chứng sản phẩm.
 
 <grid-content>
 Bốn mảnh ghép của một bug report có thể xử lý
@@ -42,9 +49,17 @@ Browser, OS, device, version và môi trường như staging hoặc production.
 
 ## Tester mới nên quan sát gì trước khi mở AI?
 
-Trước khi mở một chat tool, hãy tự ghi nhận sự kiện bằng ngôn ngữ quan sát được. Đừng bắt đầu bằng kết luận như “backend bị lỗi” khi tester mới chỉ thấy một toast không xuất hiện. Kết luận nguyên nhân quá sớm làm report khó kiểm chứng và dễ khiến team đi sai hướng.
+Trước khi mở chat tool, hãy ghi nhận sự kiện bằng ngôn ngữ quan sát được. Không kết luận “backend bị lỗi” chỉ vì một toast không xuất hiện.
 
-Quy trình nền tảng gồm năm bước. Đầu tiên, đưa ứng dụng về known state, chẳng hạn đăng nhập bằng tài khoản test mới và mở đúng trang. Tiếp theo, thực hiện từng hành động với input cụ thể. Sau đó ghi expected result từ user story, acceptance criteria hoặc test case. Cuối cùng, lặp lại lỗi ít nhất một lần và lưu evidence phù hợp.
+### Quy trình quan sát 5 bước
+
+1. Đưa ứng dụng về **known state**, ví dụ tài khoản test mới trên staging.
+2. Thực hiện từng action với input cụ thể.
+3. Ghi expected result từ user story, acceptance criteria hoặc test case.
+4. Ghi actual result đúng như quan sát được.
+5. Reproduce ít nhất một lần và lưu evidence phù hợp.
+
+Kết luận nguyên nhân quá sớm sẽ làm report khó kiểm chứng và dễ khiến team đi sai hướng.
 
 | Câu hỏi | Ví dụ ghi nhận đúng | Ví dụ nên tránh |
 | --- | --- | --- |
@@ -65,11 +80,27 @@ Tester nên làm gì trước khi nhờ AI viết bug report?
 
 ## AI giúp tester mới ở phần nào mà không làm thay phần kiểm thử?
 
-AI phù hợp với các việc có tính biên tập: biến ghi chú rời rạc thành cấu trúc report, phát hiện trường còn thiếu, đề xuất tiêu đề cụ thể hơn hoặc rút gọn đoạn mô tả dài. Tester có thể đưa vào prompt các dữ kiện đã xác minh và yêu cầu AI không suy đoán nguyên nhân.
+### AI nên làm gì?
 
-Một prompt an toàn nên nói rõ vai trò, format đầu ra và giới hạn dữ liệu. Ví dụ: “Hãy sắp xếp các ghi chú sau thành bug report gồm title, environment, steps, expected, actual và evidence. Chỉ dùng dữ kiện đã có. Nếu thiếu thông tin, ghi `CẦN BỔ SUNG`, không suy đoán root cause.” Cách này biến AI thành editor, không biến AI thành người thực thi test.
+- Sắp xếp ghi chú rời rạc thành cấu trúc report.
+- Phát hiện field còn thiếu.
+- Đề xuất title cụ thể hơn.
+- Rút gọn mô tả dài mà không đổi facts.
 
-Không đưa secret, token, dữ liệu cá nhân hay nội dung production nhạy cảm vào tool chưa được team phê duyệt. Nếu cần minh họa, thay email, ID và payload bằng data giả. Tester vẫn phải mở lại sản phẩm, kiểm tra từng step và sửa mọi câu AI diễn đạt sai trước khi tạo ticket.
+### Prompt an toàn mẫu
+
+```text
+Hãy sắp xếp các ghi chú sau thành bug report gồm title, environment, steps, expected, actual và evidence.
+Chỉ dùng dữ kiện đã có.
+Nếu thiếu thông tin, ghi CẦN BỔ SUNG, không suy đoán root cause.
+```
+
+### Trước khi gửi dữ liệu vào AI
+
+- Không gửi secret, token, dữ liệu cá nhân hoặc production data nhạy cảm.
+- Thay email, ID và payload bằng dữ liệu giả khi cần minh họa.
+- Mở lại sản phẩm và kiểm tra từng step sau khi AI viết lại.
+- Xóa mọi chi tiết AI tự thêm trước khi tạo ticket.
 
 <dropdown-content>
 AI có được tự đoán root cause không?
@@ -83,9 +114,21 @@ Một câu như “Có thể request bị timeout vì response chưa về sau 10
 
 ## Làm thế nào viết title và reproduction steps để developer chạy lại được?
 
-Title nên mô tả khu vực, hành động và kết quả bất thường. Công thức đơn giản là `[Area] - [Action] - [Unexpected result]`, chẳng hạn “Profile - Bấm Lưu email hợp lệ - spinner không kết thúc trên staging”. Title như “Không lưu được” quá ngắn, khó tìm duplicate và không giúp triage.
+### Công thức viết title
 
-Reproduction steps cần bắt đầu từ trạng thái biết trước. Mỗi bước chỉ nên chứa một hành động, gọi đúng tên button hoặc field, nêu giá trị input và ghi timing khi timing là điều kiện của lỗi. Sau khi viết, tester nên đưa report cho một người chưa xem lỗi và nhờ họ chạy theo step. Nếu họ không thể hiểu phải làm gì, report vẫn chưa đủ rõ.
+`[Area] - [Action] - [Unexpected result]`
+
+Ví dụ: `Profile - Bấm Lưu email hợp lệ - spinner không kết thúc trên staging`.
+
+| Nên có trong step | Vì sao cần |
+| --- | --- |
+| Known state | Người khác biết bắt đầu từ đâu |
+| Một action mỗi bước | Tránh nhập nhằng khi reproduce |
+| Tên button hoặc field chính xác | Giảm lỗi thao tác |
+| Giá trị input cụ thể | Tái hiện đúng điều kiện |
+| Timing nếu có liên quan | Phân biệt lỗi tức thời và timeout |
+
+Sau khi viết, nhờ một người chưa xem lỗi chạy theo report. Nếu họ không biết phải làm gì, report chưa đủ rõ.
 
 <table-testcase cols="5" rows="3" headers="ID|Known state|Steps|Expected|Actual">
 | TC01 | User mới ở trang Profile | Nhập email hợp lệ, bấm Lưu | Hiện thông báo thành công | Spinner chạy hơn 10 giây |
@@ -97,17 +140,36 @@ Reproduction steps cần bắt đầu từ trạng thái biết trước. Mỗi 
 
 ## Evidence nào đủ để report không bị trả lại?
 
-Evidence không phải càng nhiều càng tốt. Hãy chọn loại giúp người khác xác minh đúng hành vi. Screenshot phù hợp với lỗi hiển thị; video phù hợp với lỗi liên quan đến timing, animation hoặc nhiều bước; console log và network details hữu ích khi có error kỹ thuật. Với lỗi UI, ảnh nên cho thấy cả vùng liên quan và trạng thái sau hành động, không chỉ cắt sát một icon.
+### Chọn evidence theo loại lỗi
 
-[GitHub Docs về issue forms](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms) cho thấy form có thể yêu cầu các field như what happened, version, browser, log và screenshot. Tester mới có thể học cách dùng cấu trúc này ngay cả khi team đang dùng Jira hoặc tool khác, vì mục tiêu là không bỏ quên thông tin quan trọng.
+| Loại lỗi | Evidence nên ưu tiên |
+| --- | --- |
+| Hiển thị | Screenshot có cả vùng liên quan và trạng thái sau action |
+| Timing, animation, nhiều bước | Video hoặc screen recording |
+| Error kỹ thuật | Console log, request và response |
+| Form hoặc ticket có nhiều field | Dùng template để không bỏ sót version, browser, log và screenshot |
 
-Hãy ghi severity theo impact, không theo cảm xúc. Một lỗi làm mất dữ liệu hoặc chặn đăng nhập có impact khác lỗi lệch một pixel. Nếu chưa hiểu quy ước severity của team, hãy mô tả impact và hỏi người phụ trách thay vì tự gán “critical”.
+[GitHub Docs về issue forms](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms) minh họa cách yêu cầu các field bắt buộc trong issue form.
+
+### Ghi severity
+
+- Dựa trên **impact**, không dựa trên cảm xúc.
+- Mất dữ liệu hoặc chặn đăng nhập thường nghiêm trọng hơn lệch một pixel.
+- Nếu chưa biết quy ước của team, mô tả impact và hỏi người phụ trách.
+- Không tự gán `critical` khi chưa có căn cứ.
 
 ## Checklist 10 phút trước khi gửi bug report là gì?
 
-Hãy đọc report như một developer không có mặt lúc tester phát hiện lỗi. Tester có thể tự hỏi: người khác có biết bắt đầu từ đâu không, input có đủ cụ thể không, expected có nguồn không, actual có mô tả quan sát được không, evidence có đúng phiên bản không và lỗi có tái hiện lại được không.
+Hãy đọc report như một developer không có mặt lúc lỗi xảy ra.
 
-Nếu AI đã viết lại report, hãy so sánh từng câu với note gốc. Xóa mọi chi tiết AI tự thêm, đặc biệt là browser version, API status, root cause hoặc mức độ ảnh hưởng mà tester chưa kiểm tra. Đây là bước phân biệt giữa “AI giúp viết nhanh” và “AI tạo ra một ticket nghe hợp lý nhưng sai”.
+Nếu AI đã viết lại report, so sánh từng câu với note gốc. Xóa các chi tiết AI tự thêm, đặc biệt là:
+
+- Browser version.
+- API status.
+- Root cause.
+- Mức độ ảnh hưởng.
+
+Đây là ranh giới giữa “AI giúp viết nhanh” và “AI tạo ra một ticket nghe hợp lý nhưng sai”.
 
 Một tester mới có thể dùng checklist sau trong công việc đầu tiên:
 

@@ -6,11 +6,24 @@
 
 ## AI red teaming khác functional testing ở điểm nào?
 
-Functional testing hỏi hệ thống có thực hiện đúng behavior đã định trong điều kiện bình thường hay không. AI red teaming đặt hệ thống vào các điều kiện adversarial, tìm cách làm nó vi phạm policy, tiết lộ dữ liệu, gọi tool sai hoặc tạo ra hành vi nguy hiểm. Đối tượng không chỉ là model, mà là toàn bộ sociotechnical system gồm prompt, retrieval, tool, identity, runtime, người dùng và các policy bao quanh.
+| Functional testing | AI red teaming |
+| --- | --- |
+| Kiểm tra behavior đúng trong điều kiện bình thường | Tìm cách làm hệ thống vi phạm policy hoặc tạo side effect |
+| Thường nhìn vào expected output | Theo dõi cả model, prompt, retrieval, tool, identity và runtime |
+| Có thể đo pass hoặc fail theo case | Cần thêm trajectory, authorization và evidence |
 
-[OWASP AI Testing Guide v1](https://owasp.org/www-project-ai-testing-guide/) mô tả một methodology technology-agnostic cho trustworthiness testing, với phạm vi trải trên AI application layer, model layer, infrastructure layer và data layer. Đây là khác biệt quan trọng với việc chỉ chạy một bộ prompt rồi đếm pass rate.
+[OWASP AI Testing Guide v1](https://owasp.org/www-project-ai-testing-guide/) mô tả trustworthiness testing trên bốn lớp: application, model, infrastructure và data.
 
-Bài này dành cho QA automation tester, security tester và AI engineer đã biết API testing, authentication, log hoặc trace cơ bản, JSON, test data isolation và cách đọc một LLM application flow. Người đọc không cần huấn luyện model, nhưng cần hiểu request đi qua gateway, prompt template, retrieval và tool execution như thế nào. Sau bài, reader có thể thiết kế một red-team charter nhỏ, tạo test matrix và chuyển phát hiện thành evidence có thể triage.
+### Prerequisite
+
+Bài này dành cho QA automation tester, security tester và AI engineer đã biết:
+
+- API testing và authentication.
+- JSON, log hoặc trace cơ bản.
+- Test data isolation.
+- Flow của LLM application qua gateway, retrieval và tool execution.
+
+Không cần huấn luyện model. Sau bài, người đọc có thể tạo charter, test matrix và evidence có thể triage.
 
 <grid-content>
 Bốn lớp cần đưa vào scope khi red teaming LLM app
@@ -42,11 +55,22 @@ Kiểm tra secrets, dependency, network boundary, logging và khả năng lạm 
 
 ## Nên bắt đầu bằng red-team charter nào?
 
-Một session không có charter thường biến thành cuộc thi tìm prompt lạ. Trước khi chạy, hãy khóa năm trường: target, trust boundary, risk hypothesis, allowed action và exit criteria. Ví dụ target là chatbot hỗ trợ hoàn tiền; trust boundary gồm user prompt, knowledge base, payment API và tool cấp quyền refund; risk hypothesis là prompt injection trong tài liệu có thể khiến assistant gọi refund cho account khác.
+Một session không có charter dễ biến thành cuộc thi tìm prompt lạ. Hãy khóa các trường sau trước khi chạy:
 
-Charter cũng cần nêu rõ những gì không được làm. Không dùng dữ liệu production thật, không gửi payload gây denial of service, không truy cập account không thuộc test scope và không tự ý thay đổi policy. Nếu test một tool có side effect, dùng sandbox endpoint hoặc mock có audit log.
+1. **Target**: chatbot hoặc workflow nào, version nào?
+2. **Trust boundary**: prompt, knowledge base, payment API và tool nào nằm ngoài vùng tin cậy?
+3. **Risk hypothesis**: hành vi xấu nào cần chứng minh?
+4. **Allowed action**: payload và side effect nào được phép?
+5. **Exit criteria**: khi nào dừng hoặc escalate?
 
-NIST [AI RMF Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) xem evaluation và risk management là hoạt động xuyên suốt vòng đời AI. Vì vậy, red teaming không nên chỉ diễn ra trước launch. Test suite cần có baseline, owner, lịch chạy lại và cơ chế ghi nhận model hoặc prompt thay đổi.
+### Guardrail tối thiểu
+
+- Không dùng production data thật.
+- Không gửi payload gây denial of service.
+- Không truy cập account ngoài test scope.
+- Tool có side effect phải dùng sandbox hoặc mock có audit log.
+
+NIST [AI RMF Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) xem evaluation và risk management là hoạt động xuyên suốt vòng đời. Vì vậy, suite cần có baseline, owner, lịch chạy lại và version change log.
 
 | Charter field | Câu hỏi cần khóa | Ví dụ |
 | --- | --- | --- |
@@ -60,9 +84,21 @@ NIST [AI RMF Generative AI Profile](https://www.nist.gov/publications/artificial
 
 ## Làm thế nào chuyển risk thành attack hypothesis có thể chạy?
 
-Đừng viết test case dạng “thử prompt injection”. Hãy viết hypothesis có điều kiện, hành động và bằng chứng mong đợi. Mẫu hữu ích là: “Nếu attacker đưa instruction không tin cậy qua kênh X, hệ thống có thể thực hiện hành động Y trái policy Z hay không?” Với chatbot có RAG, X có thể là tài liệu được index; Y là trích xuất system prompt hoặc gọi tool; Z là không tiết lộ secret và không thao tác tenant khác.
+Đừng viết case chỉ là “thử prompt injection”. Hãy khóa đủ bốn thành phần:
 
-Một hypothesis tốt có control case và adversarial case. Control case kiểm tra behavior bình thường để tránh coi mọi refusal là pass. Adversarial case thay đổi một biến như vị trí instruction, encoding, ngôn ngữ hoặc quyền user. Nếu thay quá nhiều biến cùng lúc, tester không biết nguyên nhân nào tạo ra failure.
+| Thành phần | Câu hỏi |
+| --- | --- |
+| Kênh X | Instruction không tin cậy đi qua đâu? |
+| Hành động Y | Hệ thống có thể tiết lộ secret hoặc gọi tool nào? |
+| Policy Z | Quy tắc nào có thể bị vi phạm? |
+| Evidence | Cần giữ output, trace hay authorization event nào? |
+
+Mỗi hypothesis cần hai nhánh:
+
+- **Control case**: behavior bình thường, tránh coi mọi refusal là pass.
+- **Adversarial case**: thay đổi một biến như vị trí instruction, encoding, ngôn ngữ hoặc quyền user.
+
+Chỉ thay đổi một biến mỗi lần để còn biết nguyên nhân của failure.
 
 [OWASP GenAI Red Teaming Guide](https://genai.owasp.org/resource/genai-red-teaming-guide/) tổ chức red teaming quanh model evaluation, implementation testing, infrastructure assessment và runtime behavior analysis. Bốn vùng này có thể biến thành bốn suite riêng, mỗi suite có owner và evidence contract khác nhau.
 
@@ -76,11 +112,24 @@ Một attack hypothesis tốt nên có cấu trúc nào?
 
 ## Cần đo gì ngoài pass hoặc fail của câu trả lời?
 
-Một output an toàn chưa đủ để kết luận pass. Với LLM app, tester cần quan sát cả trajectory: input được normalize thế nào, prompt sau khi ghép có gì, retrieval trả về document nào, tool có được gọi không, authorization check ở đâu, output filter có sửa câu trả lời không và hệ thống dừng ở trạng thái nào.
+Final answer an toàn chưa đủ để kết luận pass. Hãy kiểm tra trajectory theo checklist:
 
-Các assertion nên chia thành nhiều lớp. Lớp safety kiểm tra secret, harmful content và policy violation. Lớp behavior kiểm tra assistant có giữ đúng task và không bị instruction trong data điều khiển. Lớp authorization kiểm tra user A không đọc hoặc thay đổi data của user B. Lớp operational kiểm tra latency, token usage, retry và log redaction khi payload bất thường.
+- Input được normalize thế nào?
+- Prompt sau khi ghép có instruction nào ngoài dự kiến?
+- Retrieval trả về document nào?
+- Tool có được gọi không?
+- Authorization check nằm ở đâu?
+- Output filter có sửa câu trả lời không?
+- Hệ thống dừng ở trạng thái nào?
 
-Không nên gộp tất cả thành một score. Một test có thể trả lời đúng nhưng vẫn fail vì đã gọi tool trái quyền. Ngược lại, một refusal có thể là false positive nếu policy cho phép tác vụ. Report phải giữ output, tool trace, retrieved context, identity, version và expected decision trong cùng một evidence bundle.
+| Assertion layer | Cần kiểm tra |
+| --- | --- |
+| Safety | Secret, harmful content, policy violation |
+| Behavior | Giữ đúng task, không bị data điều khiển |
+| Authorization | User A không đọc hoặc sửa data của user B |
+| Operational | Latency, token usage, retry, log redaction |
+
+Không gộp tất cả thành một score. Một output đúng vẫn fail nếu tool đã bị gọi trái quyền. Evidence bundle nên giữ output, tool trace, retrieved context, identity, version và expected decision.
 
 <table-testcase cols="6" rows="3" headers="ID|Risk|Input channel|Expected guard|Evidence">
 | RT01 | Prompt injection | Tài liệu RAG chứa instruction ngoài phạm vi | Nội dung được coi là data, không override policy | Retrieved chunks và final prompt |
@@ -102,29 +151,67 @@ Mỗi span hoặc event nên gắn correlation ID, model version, prompt templat
 
 ## Làm sao phân biệt model failure, application failure và governance failure?
 
-Khi test fail, đừng gán ngay cho model. Cùng một output nguy hiểm có thể đến từ model không tuân instruction, application ghép untrusted text vào system message, tool gateway không kiểm tra quyền hoặc governance không định nghĩa policy rõ. Root-cause taxonomy giúp team sửa đúng lớp và tránh lặp lại lỗi khi đổi model.
+Khi test fail, không gán ngay lỗi cho model. Dùng taxonomy để khoanh vùng:
 
-Model failure thường thể hiện ở việc model tạo output sai dù prompt và policy context đúng. Application failure xảy ra khi code truyền sai context, lộ retrieval data, bỏ qua authorization hoặc xử lý output không an toàn. Infrastructure failure có thể là secret trong log, network boundary sai hoặc dependency vulnerable. Governance failure nằm ở scope, policy, owner, risk acceptance và cách xử lý incident.
+| Lớp failure | Dấu hiệu cần xem |
+| --- | --- |
+| Model | Model tạo output sai dù context và policy đúng |
+| Application | Ghép sai context, lộ retrieval data, bỏ qua authorization |
+| Infrastructure | Secret trong log, network boundary sai, dependency vulnerable |
+| Governance | Scope, policy, owner hoặc risk acceptance chưa rõ |
+
+Taxonomy giúp team sửa đúng lớp và tránh lặp lại lỗi khi đổi model.
 
 Bài [Testing AI Agent: Quy trình QA và quản trị rủi ro](https://t5edu.site/blogs/testing-ai-agent-quy-trinh-qa-va-quan-tri-rui-ro) hữu ích khi hệ thống có planner, memory hoặc nhiều tool. Bài này không thay thế nội dung đó, mà bổ sung góc adversarial testing cho việc chứng minh hệ thống có thể bị ép qua trust boundary nào.
 
 ## Nên tổ chức regression suite cho red teaming ra sao?
 
-Đầu tiên, lưu seed, category, expected policy, test version và risk owner. Khi model hoặc prompt template đổi, chạy lại control set và high-risk adversarial set trước. Nếu payload dùng randomization, lưu seed và canonicalized input để failure có thể chạy lại.
+### Regression suite nên có gì?
 
-Tiếp theo, phân tách deterministic assertion và rubric judgment. “Có gọi refund tool hay không” là assertion khá rõ. “Câu trả lời có gây hiểu nhầm không” cần rubric, nhiều reviewer hoặc evaluator được kiểm chuẩn. Không dùng một LLM tự chấm duy nhất cho rủi ro cao mà không có sample review và threshold được định nghĩa trước.
+| Nhóm | Field hoặc kiểm tra |
+| --- | --- |
+| Reproducibility | Seed, canonicalized input, test version |
+| Risk context | Category, expected policy, risk owner |
+| Coverage | Control set và high-risk adversarial set |
+| Judgment | Deterministic assertion, rubric, reviewer và threshold |
+| Remediation | Finding, fix, verification và residual risk |
 
-Cuối cùng, liên kết finding với remediation và verification. Một bản vá chỉ được coi là có tác dụng khi test cũ pass, biến thể gần nghĩa vẫn pass và control case không bị phá. [Bài Test AI Agent hôm nay pass, mai fail](https://t5edu.site/blogs/test-ai-agent-hom-nay-pass-mai-fail) giải thích vì sao output không deterministic cần regression strategy thay vì một lần chạy thành công.
+Khi model hoặc prompt template đổi:
+
+1. Chạy lại control set.
+2. Chạy high-risk adversarial set.
+3. Kiểm tra biến thể gần nghĩa.
+4. Xác nhận control case không bị phá.
+
+Không dùng một LLM tự chấm duy nhất cho risk cao nếu chưa có sample review và threshold. [Bài Test AI Agent hôm nay pass, mai fail](https://t5edu.site/blogs/test-ai-agent-hom-nay-pass-mai-fail) giải thích vì sao output không deterministic cần regression strategy.
 
 ![Wide 21:9 educational diagram showing a red-team regression loop. Layout: four cards in a circular flow labeled 'Seed + Case', 'Run', 'Evidence', and 'Fix + Verify', with a central small card labeled 'Risk owner'. Solid T5Edu Blue arrows flow clockwise, and dashed Amber arrows branch from 'Evidence' to 'Risk owner' and back to 'Fix + Verify'. Exact Vietnamese labels: 'Seed + Case', 'Run', 'Evidence', 'Fix + Verify', 'Risk owner', 'Control case'. Minimalist flat vector UI design. Premium professional EdTech editorial artwork. Clean bento-grid composition with strong negative space. Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, Subtle one-pixel borders and restrained liquid-glass layers. Simple flat icons and geometric shapes, no people, no faces, no hands, no 3D, no glossy plastic, no photorealism, no dramatic lighting, no purple, no violet, no pink, no neon, no logo, no watermark.](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/JiUQFAXzljAyFcyp.png)
 
 ## Khi nào một finding đủ điều kiện để escalate?
 
-Một finding nên được escalate khi tester có target và version rõ, payload hoặc điều kiện chạy lại được, expected policy đã khóa, actual behavior vi phạm policy, evidence đủ để người khác kiểm tra và impact đã được mô tả. Với side effect, cần có audit record và xác nhận phạm vi dữ liệu đã dùng.
+### Escalation checklist
 
-Không nên gửi một chuỗi prompt rời rạc kèm kết luận “model không an toàn”. Hãy viết finding theo cấu trúc: summary, scope, precondition, steps, expected, actual, impact, evidence, suspected layer, mitigation hypothesis và residual risk. Mitigation hypothesis là đề xuất để điều tra, không phải kết luận root cause.
+Một finding đủ điều kiện escalate khi có:
 
-Nếu finding liên quan đến secret, user data hoặc khả năng thực thi hành động, dùng kênh security incident của tổ chức thay vì issue công khai. Red teaming chỉ có giá trị khi hoạt động trong phạm vi được ủy quyền và có khả năng bảo vệ dữ liệu kiểm thử.
+- Target và version rõ.
+- Payload hoặc điều kiện chạy lại được.
+- Expected policy đã khóa.
+- Actual behavior vi phạm policy.
+- Evidence đủ để người khác kiểm tra.
+- Impact và side effect đã mô tả.
+- Audit record nếu có tool call hoặc thay đổi dữ liệu.
+
+### Finding template
+
+| Field | Nội dung |
+| --- | --- |
+| Scope | Target, version, precondition |
+| Behavior | Steps, expected, actual |
+| Risk | Impact, suspected layer, residual risk |
+| Evidence | Output, trace, authorization, audit record |
+| Next step | Mitigation hypothesis và owner |
+
+Nếu có secret, user data hoặc khả năng thực thi hành động, dùng security incident channel thay vì issue công khai. Red teaming phải nằm trong phạm vi được ủy quyền.
 
 ## Tổng kết
 
