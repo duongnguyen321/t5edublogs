@@ -109,6 +109,8 @@ AI có được tự đoán root cause không?
 Không nên. Root cause là giả thuyết cần được kiểm tra bằng log, network trace, code hoặc trao đổi với developer. Report ban đầu nên mô tả symptom, expected result, actual result và evidence. Nếu tester có giả thuyết, hãy đặt nó trong phần “Hypothesis” và ghi rõ đây chưa phải kết luận.
 
 Một câu như “Có thể request bị timeout vì response chưa về sau 10 giây” hữu ích hơn câu “Backend chắc chắn hỏng”. Câu đầu giữ được hướng điều tra mà không biến phỏng đoán thành fact.
+
+Khi gửi report, đặt hypothesis sau phần actual và evidence để developer phân biệt observation với hướng điều tra.
 ```
 </dropdown-content>
 
