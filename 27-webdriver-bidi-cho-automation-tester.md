@@ -91,8 +91,7 @@ Một flow có thể viết theo thứ tự: tạo session, subscribe event cầ
 
 Timeout cũng cần có lý do. Timeout quá ngắn tạo false failure khi CI chậm, còn timeout quá dài che giấu lỗi thực sự và làm suite mất tín hiệu. Nếu test nhiều browser, hãy ghi nhận sự khác nhau về event order và capability thay vì ép mọi implementation có cùng timing tuyệt đối.
 
-<code-runner language="typescript" title="Mẫu tư duy event-driven">
-```typescript
+<code-runner lang="ts">
 const eventPromise = waitForEvent({
   contextId,
   predicate: event => event.url.includes('/profile') && event.status === 401,
@@ -103,7 +102,6 @@ await page.click('[data-testid="open-profile"]');
 const event = await eventPromise;
 expect(event.status).toBe(401);
 await unsubscribe();
-```
 </code-runner>
 
 Đoạn trên là pseudo-code mô tả thứ tự và predicate, không phải API copy-paste cho mọi Selenium binding. Trong code thật, tester phải dùng đúng interface của binding và quản lý cleanup theo test runner. Cách trình bày này cố ý tách design pattern khỏi chi tiết wrapper, vì wrapper có thể thay đổi nhanh hơn protocol.
@@ -115,17 +113,21 @@ CDP là protocol gắn chặt với Chrome DevTools ecosystem, trong khi WebDriv
 Selenium đặt BiDi cạnh phần CDP trong tài liệu để người dùng hiểu lộ trình chuyển sang lựa chọn standards-based. Với team chỉ chạy Chrome và cần một capability DevTools đặc thù, CDP có thể vẫn phù hợp. Với team cần giảm phụ thuộc vendor và theo dõi event theo mô hình WebDriver, BiDi đáng được đánh giá bằng một spike nhỏ có acceptance criteria rõ ràng.
 
 <dropdown-content>
-### Khi nào nên thử BiDi?
+Câu hỏi thường gặp về WebDriver BiDi
+> Dùng FAQ này để quyết định BiDi có phù hợp với use case hiện tại hay không.
+```markdown
+**Khi nào nên thử BiDi?**
 
 Nên thử khi test cần event browser, network interception, log hoặc capability mà request-response không diễn đạt tốt. Hãy chọn một use case nhỏ, chạy trên browser matrix của team và đo độ ổn định trước khi mở rộng.
 
-### Có nên rewrite toàn bộ suite Selenium sang BiDi không?
+**Có nên rewrite toàn bộ suite Selenium sang BiDi không?**
 
-Không nên rewrite chỉ vì protocol mới. Giữ WebDriver classic cho thao tác ổn định, sau đó bổ sung BiDi ở boundary thật sự cần event hoặc network. Mỗi capability mới cần test compatibility, cleanup và failure evidence riêng.
+Không nên rewrite chỉ vì protocol mới. Giữ WebDriver classic cho thao tác ổn định, sau đó bổ sung BiDi ở boundary thật sự cần event hoặc network.
 
-### Bài này có phù hợp cho tester mới học automation không?
+**Bài này có phù hợp cho tester mới học automation không?**
 
-Không. Tester mới nên nắm locator, wait, assertion, HTTP và lifecycle test trước. Có thể củng cố nền bằng [Playwright với TypeScript cơ bản](/blogs/playwright-voi-typescript-co-ban-cho-tester), sau đó quay lại BiDi khi đã hiểu bất đồng bộ và browser session.
+Không. Tester mới nên nắm locator, wait, assertion, HTTP và lifecycle test trước. Sau đó có thể quay lại BiDi khi đã hiểu bất đồng bộ và browser session.
+```
 </dropdown-content>
 
 ## Đánh giá BiDi trong CI mà không biến test thành hộp đen
@@ -148,5 +150,4 @@ Với suite lớn, event log có thể làm report khó đọc. Chỉ lưu paylo
 Nếu phải chọn một use case để chạy spike WebDriver BiDi tuần này, team sẽ ưu tiên bắt navigation event, kiểm tra network response hay thu console log, và acceptance criteria cụ thể là gì?
 
 ## Hashtag
-
-> webdriver bidi, selenium, automation testing, browser automation, network testing
+> WebDriver BiDi, Selenium, automation testing, browser testing, QA automation

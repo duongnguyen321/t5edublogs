@@ -8,7 +8,7 @@
 
 Bài này dành cho automation tester, QA engineer và developer đã có nền tảng TypeScript hoặc JavaScript async-await, Jest hoặc test runner tương đương, Docker, SQL/PostgreSQL và phân biệt được unit test, integration test với end-to-end test. Nếu bạn chưa biết các khái niệm đó, hãy bắt đầu từ [khóa học Tester và QA trên T5Edu](/courses) và các [bài blog testing nền tảng](/blogs) trước khi triển khai.
 
-**Testcontainers Node.js** là thư viện tạo và điều khiển container tạm thời trong lúc test chạy. Thay vì thay database bằng mock hoặc dùng một database dùng chung trên máy dev, test có thể khởi động PostgreSQL thật, lấy connection URI được map ra host, chạy assertion rồi dừng và dọn container theo lifecycle đã cấu hình. Trang [Testcontainers chính thức](https://testcontainers.com/) mô tả mô hình này là các instance nhẹ, dùng một lần cho database, browser và nhiều dependency khác.
+**Testcontainers Node.js** là thư viện điều khiển container tạm thời trong lúc test chạy. Thay vì dùng mock hoặc database chung, test khởi động PostgreSQL thật, lấy connection URI, chạy assertion rồi dọn container theo lifecycle. Trang [Testcontainers chính thức](https://testcontainers.com/) mô tả mô hình này cho database, browser và nhiều dependency khác.
 
 Khoảng trống cần giải quyết là sự khác nhau giữa mock và dependency thật. Mock giúp unit test chạy nhanh, nhưng không phát hiện lỗi do SQL dialect, transaction, index, serialization, permission hoặc hành vi thật của database. Ngược lại, một integration test dùng database dùng chung dễ bị nhiễm data, phụ thuộc thứ tự chạy và khó tái hiện. Testcontainers đưa dependency thật vào một vòng đời cô lập hơn.
 
@@ -22,7 +22,7 @@ Tình huống nào là lý do phù hợp nhất để thêm Testcontainers vào 
 
 ## Prerequisite nào cần có trước khi dùng Testcontainers?
 
-Testcontainers không thay thế foundation của integration testing. Trước khi viết code, bạn cần biết test đang kiểm tra boundary nào, dependency nào là thật, dữ liệu nào cần reset và điều kiện nào chứng minh service đã sẵn sàng. Nếu chỉ copy một đoạn `new PostgreSqlContainer().start()` mà không hiểu lifecycle, suite sẽ dễ gặp timeout, state leakage hoặc lỗi cleanup.
+Testcontainers không thay thế foundation của integration testing. Trước khi viết code, cần biết boundary, dependency thật, dữ liệu reset và điều kiện ready. Nếu chỉ copy `new PostgreSqlContainer().start()` mà không hiểu lifecycle, suite dễ gặp timeout, state leakage hoặc lỗi cleanup.
 
 Bốn prerequisite tối thiểu gồm:
 
@@ -33,7 +33,7 @@ Bốn prerequisite tối thiểu gồm:
 | Docker | Có Docker environment mà Testcontainers hỗ trợ | Thư viện cần Docker daemon để pull image và chạy container |
 | Database/API testing | Biết connection, schema, transaction và expected result | Container chỉ tạo môi trường, không tự thiết kế test oracle |
 
-Nếu team dùng TypeScript, hãy học cách truyền connection URI và port động qua fixture hoặc test context, không hard-code cổng database local. Cổng được map có thể thay đổi, đặc biệt khi chạy song song hoặc khi máy đã có service chiếm cổng mặc định.
+Với TypeScript, truyền connection URI và port động qua fixture hoặc test context, không hard-code cổng database local.
 
 ## Cấu trúc lifecycle của một Testcontainers integration test là gì?
 
@@ -74,7 +74,7 @@ describe('customer repository integration', () => {
 });
 ```
 
-[Hướng dẫn chính thức của Docker cho Testcontainers Node.js](https://docs.docker.com/guides/testcontainers-nodejs-getting-started/) dùng chính flow này: start `PostgreSqlContainer`, lấy connection URI, tạo client, chạy test với PostgreSQL thật và stop container ở `afterAll`. Guide cũng lưu ý lần chạy đầu có thể cần thời gian pull image, nên timeout phải phản ánh chi phí khởi động thật thay vì coi mọi timeout là lỗi application.
+[Hướng dẫn Docker cho Testcontainers Node.js](https://docs.docker.com/guides/testcontainers-nodejs-getting-started/) cũng dùng flow start container, lấy URI, chạy query rồi stop ở `afterAll`. Lần chạy đầu có thể pull image, nên timeout cần tính chi phí khởi động.
 
 ![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide technical diagram of a Testcontainers Node.js lifecycle from left to right. Five connected cards labeled exactly Declare, Start, Ready, Exercise, and Cleanup, with a Node.js test runner above and a PostgreSQL container below. Use solid blue arrows between lifecycle steps and an amber gate labeled Wait strategy between Start and Ready. Clean horizontal bento-grid composition with strong negative space. Paper White or Zinc-50 background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders and restrained liquid-glass layers. Exact short Vietnamese labels only where needed, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/XMseGimELPfwCWxb.png)
 
@@ -173,5 +173,4 @@ Nếu team đang học theo JavaScript hoặc TypeScript, [khóa học JavaScrip
 Nếu bạn đã có nền tảng Docker, TypeScript và database testing, hãy học thêm [nội dung QA và Tester theo khóa học](/courses) rồi chọn một repository boundary để chuyển từ mock sang PostgreSQL thật. Dependency nào trong hệ thống của bạn đang tạo rủi ro lớn nhất nếu chỉ test bằng mock?
 
 ## Hashtag
-
-> testcontainers, nodejs-testing, integration-testing, postgresql, qa-automation
+> Testcontainers, Node.js testing, integration testing, Docker, QA automation

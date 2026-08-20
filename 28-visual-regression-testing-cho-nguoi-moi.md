@@ -137,5 +137,4 @@ Nếu bạn đang học foundation kiểm thử, hãy kết hợp bài này vớ
 Nếu bạn đã nắm test case và expected result, hãy học thêm [các khóa học nền tảng cho Tester](/courses) rồi tự viết một visual test cho login page. Bạn sẽ bảo vệ component nào đầu tiên, và bằng chứng nào giúp bạn quyết định diff đó là bug?
 
 ## Hashtag
-
-> visual-regression-testing, visual-testing, playwright, qa-beginner, software-testing
+> visual regression testing, screenshot testing, UI testing, test automation, QA

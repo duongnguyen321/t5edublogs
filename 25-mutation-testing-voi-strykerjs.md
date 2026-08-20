@@ -43,7 +43,27 @@ Một test gọi `canCheckout(100, 5)` và chỉ assert rằng hàm chạy thàn
 Điều này không có nghĩa code coverage vô dụng. Coverage giúp tìm vùng chưa được chạy. Mutation testing giúp tìm vùng đã chạy nhưng test chưa đủ sức phân biệt hành vi đúng và hành vi bị thay đổi. Hai chỉ số bổ sung cho nhau, không nên dùng một chỉ số để phủ nhận chỉ số còn lại.
 
 <grid-content>
-{"columns":2,"items":[{"title":"Coverage hỏi gì?","content":"Test đã đi qua dòng, function hoặc branch nào?"},{"title":"Mutation hỏi gì?","content":"Test có phát hiện khi hành vi trong vùng đó bị thay đổi không?"},{"title":"Coverage cao, assertion yếu","content":"Code được chạy nhưng kết quả quan trọng chưa được xác nhận."},{"title":"Mutation score thấp","content":"Có thể cần thêm boundary case, negative case hoặc assertion cụ thể."}]}
+Các điểm cần nhớ
+> Coverage hỏi gì?
+```markdown
+**Coverage hỏi gì?**
+Test đã đi qua dòng, function hoặc branch nào?
+```
+> Mutation hỏi gì?
+```markdown
+**Mutation hỏi gì?**
+Test có phát hiện khi hành vi trong vùng đó bị thay đổi không?
+```
+> Coverage cao, assertion yếu
+```markdown
+**Coverage cao, assertion yếu**
+Code được chạy nhưng kết quả quan trọng chưa được xác nhận.
+```
+> Mutation score thấp
+```markdown
+**Mutation score thấp**
+Có thể cần thêm boundary case, negative case hoặc assertion cụ thể.
+```
 </grid-content>
 
 ## Chuẩn bị project JavaScript hoặc TypeScript
@@ -75,9 +95,12 @@ Hãy phân loại surviving mutant thành bốn nhóm. Nhóm thứ nhất là **
 
 Một workflow triage có thể ghi lại thông tin sau:
 
-<testcase-table>
-{"title":"Mutation triage","columns":["Mutant","Thay đổi","Chẩn đoán","Hành động","Ưu tiên"],"rows":[["M01","Đổi > thành >=","Boundary assertion thiếu","Thêm test total bằng limit","Cao"],["M02","Xóa nhánh lỗi","Không có negative scenario","Thêm test input không hợp lệ","Cao"],["M03","Đổi tên biến","Equivalent mutant","Đánh dấu không actionable","Thấp"],["M04","Đổi giá trị mặc định","Test thiếu state khác","Bổ sung fixture và assertion","Trung bình"]]}
-</testcase-table>
+<table-testcase cols="5" rows="4" headers="Mutant|Thay đổi|Chẩn đoán|Hành động|Ưu tiên">
+| M01 | Đổi > thành >= | Boundary assertion thiếu | Thêm test total bằng limit | Cao |
+| M02 | Xóa nhánh lỗi | Không có negative scenario | Thêm test input không hợp lệ | Cao |
+| M03 | Đổi tên biến | Equivalent mutant | Đánh dấu không actionable | Thấp |
+| M04 | Đổi giá trị mặc định | Test thiếu state khác | Bổ sung fixture và assertion | Trung bình |
+</table-testcase>
 
 Không nên sửa test chỉ để giết mọi mutant bằng mọi giá. Một test mới cần thể hiện behavior hoặc risk mà team thực sự muốn bảo vệ. Nếu chỉ thêm assertion vào implementation detail để làm score tăng, test suite có thể trở nên brittle mà không tăng khả năng phát hiện lỗi thực tế.
 
@@ -89,9 +112,13 @@ Trong CI, team có thể tách hai mức kiểm tra. Pull request chạy phạm 
 
 Một policy thực tế có thể bắt đầu bằng việc không cho phép **giảm** mutation score của module đã có baseline, đồng thời bắt buộc triage các mutant mới liên quan đến logic nghiệp vụ. Threshold chỉ nên là một phần của policy. Code review vẫn cần xem test có thể hiện requirement hay không, còn mutation report chỉ cung cấp thêm bằng chứng.
 
-<multiple-choice-question>
-{"question":"Khi một mutant survive, hành động đầu tiên có giá trị nhất là gì?","options":["Xóa ngay mutant khỏi báo cáo","Tăng threshold toàn project","Đọc thay đổi của mutant và kiểm tra test assertion liên quan","Viết một test bất kỳ để tăng score"],"correctAnswer":2,"explanation":"Surviving mutant là tín hiệu cần điều tra. Trước khi sửa, phải xác định đó là missing test, weak assertion, equivalent mutant hay một trường hợp không thuộc scope."}
-</multiple-choice-question>
+<multiple-choice correct="C" select="single">
+Khi một mutant survive, hành động đầu tiên có giá trị nhất là gì?
+- A: Xóa ngay mutant khỏi báo cáo
+- B: Tăng threshold toàn project
+- C: Đọc thay đổi của mutant và kiểm tra test assertion liên quan
+- D: Viết một test bất kỳ để tăng score
+</multiple-choice>
 
 ## Giới hạn và cách dùng đúng mutation score
 
@@ -102,7 +129,19 @@ Mutation score cũng không nên dùng để so sánh máy móc giữa hai repos
 Nếu team mới bắt đầu, hãy triển khai theo trình tự: chọn một module nhỏ, ghi baseline, đọc report bằng tay, triage một nhóm mutant, thêm test có lý do, rồi mới cân nhắc CI gate. Cách này biến mutation testing thành hoạt động cải thiện feedback loop thay vì một cuộc thi phần trăm.
 
 <dropdown-content>
-{"title":"FAQ về StrykerJS","items":[{"question":"Mutation testing có thay thế code coverage không?","answer":"Không. Coverage cho biết vùng code đã được chạy; mutation testing kiểm tra test suite có phát hiện một số thay đổi có chủ đích hay không. Hai kỹ thuật bổ sung cho nhau."},{"question":"Có cần giết tất cả mutant không?","answer":"Không nhất thiết. Equivalent mutant và mutant ngoài risk hoặc scope có thể được triage, loại trừ có lý do hoặc ghi nhận riêng. Mục tiêu là tăng khả năng phát hiện lỗi, không phải tối đa hóa điểm số."},{"question":"Có nên chạy mutation testing ở mọi pull request không?","answer":"Tùy kích thước project và thời gian chạy. Có thể chạy phạm vi nhỏ trong pull request và phạm vi rộng theo lịch, miễn là policy, baseline và cách triage được ghi rõ."}]}
+FAQ về StrykerJS
+> Mutation testing có thay thế code coverage không?
+```markdown
+Không. Coverage cho biết vùng code đã được chạy; mutation testing kiểm tra test suite có phát hiện một số thay đổi có chủ đích hay không. Hai kỹ thuật bổ sung cho nhau.
+```
+> Có cần giết tất cả mutant không?
+```markdown
+Không nhất thiết. Equivalent mutant và mutant ngoài risk hoặc scope có thể được triage, loại trừ có lý do hoặc ghi nhận riêng. Mục tiêu là tăng khả năng phát hiện lỗi, không phải tối đa hóa điểm số.
+```
+> Có nên chạy mutation testing ở mọi pull request không?
+```markdown
+Tùy kích thước project và thời gian chạy. Có thể chạy phạm vi nhỏ trong pull request và phạm vi rộng theo lịch, miễn là policy, baseline và cách triage được ghi rõ.
+```
 </dropdown-content>
 
 ## Tổng kết
@@ -122,5 +161,4 @@ Nếu bạn đã có một project JavaScript hoặc TypeScript với unit test 
 - [Mutation Analysis and Automated Assessment of Testing Skills, ACM](https://dl.acm.org/doi/10.1145/1869542.1869567)
 
 ## Hashtag
-
-#mutationtesting, #strykerjs, #javascripttesting, #typescripttesting, #testquality, #qaautomation, #sdet
+> mutation testing, StrykerJS, JavaScript testing, TypeScript testing, test quality

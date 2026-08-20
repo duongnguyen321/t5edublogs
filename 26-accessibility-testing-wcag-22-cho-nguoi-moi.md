@@ -91,17 +91,21 @@ Có những câu hỏi cần người kiểm tra. Alt text có thể tồn tại
 Quy trình thực tế cho người mới có thể gồm ba lớp. Lớp đầu là scan nhanh để tìm lỗi lặp lại. Lớp hai là keyboard và focus cho flow quan trọng. Lớp ba là kiểm tra bằng user flow, form và nội dung hiển thị, sau đó chuyển case khó sang người có kinh nghiệm hoặc accessibility specialist.
 
 <dropdown-content>
-### Vì sao không nên chỉ dùng một công cụ scan?
+Câu hỏi thường gặp về accessibility testing
+> Mở từng câu hỏi để ôn lại cách chọn phương pháp kiểm tra.
+```markdown
+**Vì sao không nên chỉ dùng một công cụ scan?**
 
-Công cụ tự động chỉ nhìn được các pattern mà nó có thể suy luận. Nó không hiểu đầy đủ mục đích của ảnh, chất lượng câu chữ, tính hợp lý của thứ tự focus hoặc việc thông báo lỗi có giúp user hoàn thành tác vụ hay không.
+Công cụ tự động chỉ nhìn được các pattern mà nó có thể suy luận. Nó không hiểu đầy đủ mục đích của ảnh, chất lượng câu chữ, thứ tự focus hoặc việc thông báo lỗi có giúp user hoàn thành tác vụ hay không.
 
-### Người mới có cần học thuộc WCAG 2.2 không?
+**Người mới có cần học thuộc WCAG 2.2 không?**
 
-Không cần học thuộc trước khi bắt đầu. Hãy học cách đọc một success criterion, chuyển nó thành câu hỏi kiểm thử, chạy trên một flow nhỏ và ghi evidence. Khi gặp lỗi lặp lại, đọc thêm Understanding WCAG để hiểu nguyên nhân và cách kiểm chứng.
+Không cần học thuộc trước khi bắt đầu. Hãy học cách đọc một success criterion, chuyển nó thành câu hỏi kiểm thử, chạy trên một flow nhỏ và ghi evidence.
 
-### Accessibility testing có thay manual testing không?
+**Accessibility testing có thay manual testing không?**
 
-Không. Accessibility testing là một góc kiểm tra bổ sung trong manual testing. Tester vẫn cần hiểu requirement, expected result, risk, test data và cách viết bug report có thể tái hiện.
+Không. Đây là một góc kiểm tra bổ sung. Tester vẫn cần hiểu requirement, expected result, risk, test data và cách viết bug report có thể tái hiện.
+```
 </dropdown-content>
 
 ## Ghi bug accessibility testing thế nào để developer sửa được?
@@ -122,5 +126,4 @@ Nếu biết success criterion liên quan, tester có thể ghi ở phần refer
 Flow nào trong dự án hiện tại sẽ thay đổi kết luận nếu tester chỉ dùng chuột mà không thử bàn phím?
 
 ## Hashtag
-
-> accessibility testing, wcag 2.2, manual testing, qa beginner, web testing
+> accessibility testing, WCAG 2.2, manual testing, usability, software testing

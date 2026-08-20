@@ -23,9 +23,13 @@ Acceptance criteria, hay điều kiện chấp nhận, là các điều kiện m
 
 Điểm quan trọng là **không biến user story thành một danh sách thao tác ngay lập tức**. Trước tiên, tester phải hiểu outcome và ranh giới của yêu cầu. Nếu acceptance criteria chưa nói rõ một hành vi, đó có thể là câu hỏi cần làm rõ chứ chưa phải quyền tự thêm yêu cầu.
 
-<multiple-choice-question>
-{"question":"Acceptance criteria có vai trò chính nào trong kiểm thử?","options":["Thay thế hoàn toàn mọi test case","Làm rõ điều kiện để work item được chấp nhận","Chọn framework automation cho team","Đo tốc độ chạy của ứng dụng"],"correctAnswer":1,"explanation":"Acceptance criteria mô tả điều kiện cần đạt, giúp team có căn cứ chung để phát triển và kiểm thử. Tester vẫn cần chuyển chúng thành scenario và test case phù hợp."}
-</multiple-choice-question>
+<multiple-choice correct="B" select="single">
+Acceptance criteria có vai trò chính nào trong kiểm thử?
+- A: Thay thế hoàn toàn mọi test case
+- B: Làm rõ điều kiện để work item được chấp nhận
+- C: Chọn framework automation cho team
+- D: Đo tốc độ chạy của ứng dụng
+</multiple-choice>
 
 ## Đọc một user story theo bốn câu hỏi cơ bản
 
@@ -68,7 +72,27 @@ Bảng này giúp phân biệt **điều kiện** với **thao tác**. “Đã �
 Nếu criterion dùng các từ như “nhanh”, “dễ dàng”, “hợp lệ”, “đúng” hoặc “phù hợp” nhưng không có cách đo hay ví dụ, hãy ghi lại để hỏi. Tester không nên tự đặt ngưỡng thời gian hoặc quy tắc dữ liệu rồi báo bug vì sản phẩm không tuân theo quy tắc chưa được thống nhất.
 
 <grid-content>
-{"columns":2,"items":[{"title":"Đã rõ","content":"Người dùng đã đăng nhập có thể thêm sản phẩm đang hoạt động vào danh sách yêu thích."},{"title":"Cần hỏi thêm","content":"Hệ thống phải phản hồi nhanh khi người dùng lưu sản phẩm."},{"title":"Đã quan sát được","content":"Biểu tượng đổi trạng thái và sản phẩm xuất hiện trong danh sách."},{"title":"Không nên tự đoán","content":"Phản hồi nhanh nghĩa là dưới bao nhiêu giây và đo từ thời điểm nào?"}]}
+Các điểm cần nhớ
+> Đã rõ
+```markdown
+**Đã rõ**
+Người dùng đã đăng nhập có thể thêm sản phẩm đang hoạt động vào danh sách yêu thích.
+```
+> Cần hỏi thêm
+```markdown
+**Cần hỏi thêm**
+Hệ thống phải phản hồi nhanh khi người dùng lưu sản phẩm.
+```
+> Đã quan sát được
+```markdown
+**Đã quan sát được**
+Biểu tượng đổi trạng thái và sản phẩm xuất hiện trong danh sách.
+```
+> Không nên tự đoán
+```markdown
+**Không nên tự đoán**
+Phản hồi nhanh nghĩa là dưới bao nhiêu giây và đo từ thời điểm nào?
+```
 </grid-content>
 
 ## Từ điều kiện thành test scenario như thế nào?
@@ -79,9 +103,12 @@ Với tính năng yêu thích, nhóm luồng đúng có thể gồm thêm sản 
 
 Một scenario tốt không phải là danh sách càng dài càng tốt. Nó phải giúp team nhìn thấy những hành vi quan trọng cần xác nhận. Nếu một scenario không liên hệ được với user story, acceptance criteria hoặc rủi ro đã thống nhất, hãy hỏi vì sao nó cần xuất hiện.
 
-<testcase-table>
-{"title":"Scenario kiểm thử từ acceptance criteria","columns":["ID","Scenario","Loại","Liên kết criterion","Kết quả mong đợi"],"rows":[["S01","Thêm sản phẩm đang hoạt động","Positive","AC1, AC2","Sản phẩm được lưu và hiển thị trong danh sách"],["S02","Bỏ sản phẩm đã lưu","Positive","AC3","Sản phẩm bị gỡ khỏi danh sách"],["S03","Thêm sản phẩm ngừng bán","Negative","AC4","Hệ thống từ chối theo quy tắc đã thống nhất"],["S04","Người chưa đăng nhập chọn yêu thích","Question","Chưa rõ","Cần xác nhận yêu cầu đăng nhập hoặc hành vi chuyển hướng"]]}
-</testcase-table>
+<table-testcase cols="5" rows="4" headers="ID|Scenario|Loại|Liên kết criterion|Kết quả mong đợi">
+| S01 | Thêm sản phẩm đang hoạt động | Positive | AC1, AC2 | Sản phẩm được lưu và hiển thị trong danh sách |
+| S02 | Bỏ sản phẩm đã lưu | Positive | AC3 | Sản phẩm bị gỡ khỏi danh sách |
+| S03 | Thêm sản phẩm ngừng bán | Negative | AC4 | Hệ thống từ chối theo quy tắc đã thống nhất |
+| S04 | Người chưa đăng nhập chọn yêu thích | Question | Chưa rõ | Cần xác nhận yêu cầu đăng nhập hoặc hành vi chuyển hướng |
+</table-testcase>
 
 ## Khi acceptance criteria chưa đủ rõ, tester nên làm gì?
 
@@ -108,7 +135,19 @@ Trước khi mở công cụ quản lý test, hãy tự kiểm tra năm điểm.
 Nếu câu trả lời cuối cùng là có, hãy tách phần đó thành câu hỏi hoặc assumption được ghi rõ. Đừng biến thói quen cá nhân thành yêu cầu của sản phẩm.
 
 <dropdown-content>
-{"title":"FAQ cho tester mới","items":[{"question":"Acceptance criteria có phải là test case không?","answer":"Không. Acceptance criteria là điều kiện để work item được chấp nhận. Test case là cách cụ thể để kiểm tra các điều kiện đó, gồm dữ liệu, bước thực hiện và kết quả mong đợi."},{"question":"Có cần viết test case cho mọi câu trong user story không?","answer":"Không nhất thiết. Hãy dùng user story để hiểu mục tiêu, dùng acceptance criteria và rủi ro để chọn scenario. Một criterion có thể cần nhiều test case, nhưng cũng có chi tiết chỉ là bối cảnh."},{"question":"Nếu yêu cầu thiếu thì tester có được tự quyết định không?","answer":"Tester có thể đưa ra giả định để thảo luận, nhưng không nên âm thầm biến giả định thành expected result. Hãy ghi câu hỏi, phạm vi ảnh hưởng và quyết định của team."}]}
+FAQ cho tester mới
+> Acceptance criteria có phải là test case không?
+```markdown
+Không. Acceptance criteria là điều kiện để work item được chấp nhận. Test case là cách cụ thể để kiểm tra các điều kiện đó, gồm dữ liệu, bước thực hiện và kết quả mong đợi.
+```
+> Có cần viết test case cho mọi câu trong user story không?
+```markdown
+Không nhất thiết. Hãy dùng user story để hiểu mục tiêu, dùng acceptance criteria và rủi ro để chọn scenario. Một criterion có thể cần nhiều test case, nhưng cũng có chi tiết chỉ là bối cảnh.
+```
+> Nếu yêu cầu thiếu thì tester có được tự quyết định không?
+```markdown
+Tester có thể đưa ra giả định để thảo luận, nhưng không nên âm thầm biến giả định thành expected result. Hãy ghi câu hỏi, phạm vi ảnh hưởng và quyết định của team.
+```
 </dropdown-content>
 
 ## Tổng kết
@@ -127,5 +166,4 @@ Nếu bạn đang học testing, hãy chọn một ticket nhỏ, đánh dấu b�
 - [Certified Tester Foundation Level Agile Tester, ISTQB](https://www.istqb.org/certifications/certified-tester-foundation-level)
 
 ## Hashtag
-
-#acceptancecriteria, #userstory, #testscenario, #softwaretesting, #manualtesting, #testernewbie, #qa
+> user story, acceptance criteria, test scenario, manual testing, software testing
