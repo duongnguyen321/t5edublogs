@@ -113,19 +113,25 @@ CDP là protocol gắn chặt với Chrome DevTools ecosystem, trong khi WebDriv
 Selenium đặt BiDi cạnh phần CDP trong tài liệu để người dùng hiểu lộ trình chuyển sang lựa chọn standards-based. Với team chỉ chạy Chrome và cần một capability DevTools đặc thù, CDP có thể vẫn phù hợp. Với team cần giảm phụ thuộc vendor và theo dõi event theo mô hình WebDriver, BiDi đáng được đánh giá bằng một spike nhỏ có acceptance criteria rõ ràng.
 
 <dropdown-content>
-Câu hỏi thường gặp về WebDriver BiDi
-> Dùng FAQ này để quyết định BiDi có phù hợp với use case hiện tại hay không.
+Khi nào nên thử BiDi?
+> Chọn một use case nhỏ trước khi mở rộng.
 ```markdown
-**Khi nào nên thử BiDi?**
+Nên thử khi test cần event browser, network interception, log hoặc capability mà request-response không diễn đạt tốt. Chạy thử trên browser matrix của team và đo độ ổn định trước khi mở rộng.
+```
+</dropdown-content>
 
-Nên thử khi test cần event browser, network interception, log hoặc capability mà request-response không diễn đạt tốt. Hãy chọn một use case nhỏ, chạy trên browser matrix của team và đo độ ổn định trước khi mở rộng.
+<dropdown-content>
+Có nên rewrite toàn bộ suite Selenium sang BiDi?
+> Không rewrite chỉ vì protocol mới.
+```markdown
+Giữ WebDriver classic cho thao tác ổn định, sau đó bổ sung BiDi ở boundary thật sự cần event hoặc network.
+```
+</dropdown-content>
 
-**Có nên rewrite toàn bộ suite Selenium sang BiDi không?**
-
-Không nên rewrite chỉ vì protocol mới. Giữ WebDriver classic cho thao tác ổn định, sau đó bổ sung BiDi ở boundary thật sự cần event hoặc network.
-
-**Bài này có phù hợp cho tester mới học automation không?**
-
+<dropdown-content>
+Bài này có phù hợp cho tester mới học automation?
+> Đây là bài knowledge-first, không phải bài nhập môn.
+```markdown
 Không. Tester mới nên nắm locator, wait, assertion, HTTP và lifecycle test trước. Sau đó có thể quay lại BiDi khi đã hiểu bất đồng bộ và browser session.
 ```
 </dropdown-content>
