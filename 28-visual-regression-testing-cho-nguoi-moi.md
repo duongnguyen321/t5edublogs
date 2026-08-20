@@ -1,8 +1,8 @@
-# Visual Regression Testing Cho Người Mới: Từ Baseline Đến Triage
+visual-regression-testing, visual-testing, playwright, qa-beginner, software-testing
 
-> Visual regression testing giúp tester phát hiện thay đổi giao diện ngoài ý muốn bằng cách so sánh screenshot với baseline có kiểm soát, từ đó biết khi nào cần báo bug và khi nào chỉ là thay đổi hợp lệ.
+# Visual Regression Testing Cho Người Mới
 
-![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 1:1 square cover illustration of a beginner tester comparing two web UI screenshots labeled exactly Baseline and Lần chạy mới, with a blue magnifying glass over a small highlighted visual difference and an amber warning badge labeled Visual diff. Clean bento-grid composition with strong negative space. Paper White or Zinc-50 background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders and restrained liquid-glass layers. Simple flat icons, geometric shapes, crisp Vietnamese labels, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/uLpBWtuNwZiUNFwu.png)
+![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 1:1 square cover for a beginner visual regression testing article, clean bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, two browser cards labeled "Baseline" and "Lần chạy mới" with a blue magnifying glass over a small highlighted visual difference and an amber badge labeled "Visual diff", simple flat geometric icons, crisp short Vietnamese labels only, subtle one-pixel borders and restrained liquid-glass layers, no gradients, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/uLpBWtuNwZiUNFwu.png)
 
 ## Visual regression testing là gì và khác functional testing ra sao?
 
@@ -10,7 +10,7 @@
 
 Functional testing thường hỏi: “Tester có bấm được nút và nhận đúng kết quả không?”. Visual testing hỏi thêm: “User có đang nhìn thấy giao diện đúng như thiết kế không?”. Một form có thể submit thành công nhưng label bị che, nút nằm ngoài màn hình mobile hoặc thông báo lỗi cùng màu với nền. Vì vậy visual regression testing bổ sung cho test case chức năng, không thay thế chúng.
 
-Nếu bạn đang xây foundation, hãy xem [khóa học Tester và QA trên T5Edu](/courses) để củng cố các khái niệm test case, expected result và defect trước khi thêm visual diff vào bộ kiểm thử. Bạn cũng có thể xem [các bài blog testing của T5Edu](/blogs) để nối kỹ thuật này với quy trình kiểm thử thực tế.
+Nếu bạn đang xây foundation, hãy xem [khóa học Tester và QA trên T5Edu](https://t5edu.site/courses) để củng cố các khái niệm test case, expected result và defect trước khi thêm visual diff vào bộ kiểm thử. Bạn cũng có thể xem [các bài blog testing của T5Edu](https://t5edu.site/blogs) để nối kỹ thuật này với quy trình kiểm thử thực tế.
 
 <multiple-choice correct="C" select="single">
 Một test chức năng kiểm tra nút “Đăng nhập” có thể click và chuyển trang thành công. Visual regression testing bổ sung câu hỏi nào?
@@ -37,7 +37,7 @@ Quy trình phê duyệt baseline cho người mới có thể đơn giản như 
 
 Đừng tạo baseline từ một trang đang có banner ngẫu nhiên, đồng hồ chạy hoặc dữ liệu tài khoản thay đổi theo mỗi request. Nếu baseline sai, mọi lần so sánh sau sẽ báo lỗi sai theo cùng một mẫu.
 
-![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide educational diagram showing the visual regression baseline workflow from left to right. Four rounded cards connected by solid T5Edu Blue arrows, labeled exactly Chuẩn bị dữ liệu, Chụp screenshot, Review diff, and Lưu baseline. Include flat icons for stable browser, camera, magnifying glass, and approved checkmark. Add an amber checkpoint badge labeled Phê duyệt trước khi cập nhật. Clean horizontal bento-grid composition with strong negative space. Paper White or Zinc-50 background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Subtle one-pixel borders and restrained liquid-glass layers. Exact short Vietnamese labels only, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/IBycGODUUihyxKBq.png)
+![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide section image for a visual regression testing baseline workflow, clean horizontal bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, four rounded cards connected left-to-right by solid blue arrows labeled "Chuẩn bị dữ liệu", "Chụp screenshot", "Review diff", and "Lưu baseline", flat icons for fixture, camera, magnifying glass, and approved checkmark, amber checkpoint badge labeled "Phê duyệt trước khi cập nhật", short Vietnamese labels only, subtle one-pixel borders and restrained liquid-glass layers, no gradients, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/IBycGODUUihyxKBq.png)
 
 ## Làm visual diff đầu tiên với Playwright như thế nào?
 
@@ -56,7 +56,7 @@ Lần chạy đầu có thể tạo file snapshot. Từ lần thứ hai, test s�
 
 Playwright dùng pixel comparison và cho phép cấu hình `maxDiffPixels`. Tuy nhiên, đừng chọn một ngưỡng lớn chỉ để làm test xanh. Ngưỡng phải phản ánh mức nhiễu chấp nhận được của giao diện, còn thay đổi quan trọng như mất nút, lệch layout hoặc sai màu trạng thái vẫn phải khiến tester điều tra.
 
-Nếu bạn muốn củng cố JavaScript và TypeScript trước khi viết test, [khóa JavaScript cho QA trên T5Edu](/courses/javascript-cho-qa-engineer) là bước chuẩn bị phù hợp. Người mới cũng nên đọc [blog testing của T5Edu](/blogs) rồi tự chuyển một trạng thái trong đó thành visual test nhỏ.
+Nếu bạn muốn củng cố JavaScript và TypeScript trước khi viết test, [khóa JavaScript cho QA trên T5Edu](https://t5edu.site/courses/javascript-cho-qa-engineer) là bước chuẩn bị phù hợp. Người mới cũng nên đọc [blog testing của T5Edu](https://t5edu.site/blogs) rồi tự chuyển một trạng thái trong đó thành visual test nhỏ.
 
 <table-testcase cols="4" rows="4" headers="ID|Trạng thái|Thao tác|Kết quả mong đợi">
 | VR01 | Trang login mặc định | Mở trang với viewport desktop ổn định | Screenshot khớp baseline |
@@ -94,8 +94,6 @@ Giữ nhất quán browser, OS, font, viewport và chế độ headless giữa l
 ```
 </grid-content>
 
-![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide educational illustration for a Vietnamese T5Edu blog about visual regression testing. Show a clean horizontal triage board with three connected panels labeled exactly Baseline, Actual, and Diff, followed by two decision cards labeled Bug and Accepted change. Use a blue magnifying-glass icon, blue arrows, amber highlighted mismatch, Paper White or Zinc-50 background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, subtle one-pixel borders, restrained liquid-glass layers, strong negative space, flat geometric icons. Exact short English labels only. No people, no faces, no hands, no purple, no violet, no pink, no neon, no photorealism, no 3D, no glossy plastic, no dramatic lighting, no logo, no watermark, no dense paragraphs](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/pcgozSfxUbTcmxtv.png)
-
 ## Triage visual diff thế nào để biết đó là bug?
 
 Khi test đỏ, đừng cập nhật baseline ngay. Hãy đọc diff theo ba lớp. Lớp thứ nhất là **độ rộng thay đổi**, chẳng hạn một pixel noise nhỏ khác với cả card biến mất. Lớp thứ hai là **nguyên nhân**, chẳng hạn CSS mới, font chưa tải, viewport sai hoặc dữ liệu động. Lớp thứ ba là **tác động đến user**, chẳng hạn thay đổi làm mất nút thanh toán nghiêm trọng hơn thay đổi border của card.
@@ -109,7 +107,7 @@ Quy trình triage tối thiểu gồm bốn câu hỏi:
 
 Nếu thay đổi có chủ đích, cập nhật baseline trong cùng pull request với code UI và ghi rõ lý do. Nếu chưa rõ, giữ test đỏ, đính kèm actual image, baseline image và diff image để developer hoặc designer cùng review. Việc “approve tất cả thay đổi” làm baseline mất giá trị kiểm soát.
 
-![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide visual diff triage illustration with three panels labeled exactly Baseline, Actual, and Diff. Show a stable login card in the first panel, a shifted button in the second, and an amber highlighted difference in the third, connected by blue arrows. Add a compact decision branch labeled Bug or Accepted change, with a blue bug icon and amber check icon. Clean horizontal bento-grid composition with strong negative space. Paper White or Zinc-50 background #fafafa. Zinc-900 content #18181b. T5Edu Blue accent #1a73e8. Amber highlight #f59e0b. Exact short Vietnamese labels only, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/UktTjnIpLaNAyOqE.png)
+![Minimalist flat vector UI design, premium professional EdTech editorial artwork, 21:9 wide section image for visual regression testing triage, clean horizontal bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, three browser panels labeled "Baseline", "Actual", and "Diff" connected by blue arrows, shifted login button highlighted in amber, decision branch labeled "Bug" and "Accepted change" with flat bug and approval icons, short Vietnamese labels only, subtle one-pixel borders and restrained liquid-glass layers, no gradients, no people, no faces, no hands, no 3D, no photorealism, no purple, no violet, no pink, no neon, no logo, no watermark](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/UktTjnIpLaNAyOqE.png)
 
 <dropdown-content>
 Khi nào nên cập nhật baseline và khi nào phải báo bug?
@@ -125,7 +123,7 @@ Hãy bắt đầu bằng một trang ít biến động và một mục tiêu nh
 
 Đừng vội bảo vệ mọi route. Một visual test hữu ích là test mà team hiểu nó đang bảo vệ điều gì và có thể review khi nó fail. Sau khi đã quen với baseline và triage, bạn mới mở rộng sang responsive layout, theme, component library hoặc nhiều browser.
 
-Nếu bạn đang học foundation kiểm thử, hãy kết hợp bài này với [khóa học Tester và QA](/courses) thay vì chỉ học syntax của Playwright. Nếu muốn luyện tư duy theo câu hỏi và expected result, hãy bắt đầu từ [khu vực blog testing của T5Edu](/blogs) rồi chọn một màn hình nhỏ để tự thiết kế bảng testcase visual.
+Nếu bạn đang học foundation kiểm thử, hãy kết hợp bài này với [khóa học Tester và QA](https://t5edu.site/courses) thay vì chỉ học syntax của Playwright. Nếu muốn luyện tư duy theo câu hỏi và expected result, hãy bắt đầu từ [khu vực blog testing của T5Edu](https://t5edu.site/blogs) rồi chọn một màn hình nhỏ để tự thiết kế bảng testcase visual.
 
 ## Tổng kết
 
@@ -134,8 +132,9 @@ Nếu bạn đang học foundation kiểm thử, hãy kết hợp bài này vớ
 - Dynamic content, font, animation, viewport và khác biệt môi trường là nguồn false failure phổ biến, cần xử lý bằng mock, mask hoặc cấu hình ổn định.
 - Khi visual diff xuất hiện, tester phải triage trước khi approve, đồng thời phân biệt bug thật với accepted change.
 
-Nếu bạn đã nắm test case và expected result, hãy học thêm [các khóa học nền tảng cho Tester](/courses) rồi tự viết một visual test cho login page. Bạn sẽ bảo vệ component nào đầu tiên, và bằng chứng nào giúp bạn quyết định diff đó là bug?
+Nếu bạn đã nắm test case và expected result, hãy học thêm [các khóa học nền tảng cho Tester](https://t5edu.site/courses) rồi tự viết một visual test cho login page. Bạn sẽ bảo vệ component nào đầu tiên, và bằng chứng nào giúp bạn quyết định diff đó là bug?
+
+
 
 ## Hashtag
-
 > visual-regression-testing, visual-testing, playwright, qa-beginner, software-testing
