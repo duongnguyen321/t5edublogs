@@ -4,17 +4,23 @@
 
 ![Square 1:1 educational editorial illustration for T5Edu about a beginner tester reading a user story and acceptance criteria. Minimalist flat vector UI design, premium professional EdTech editorial artwork, clean bento-grid composition with strong negative space, Paper White background #fafafa, Zinc-900 content #18181b, T5Edu Blue accent #1a73e8, Amber highlight #f59e0b, subtle one-pixel borders, rounded cards, calm precise instructional mood. Show a young Vietnamese tester at a desk reviewing three connected cards labeled exactly “User story”, “Điều kiện chấp nhận”, and “Scenario kiểm thử”, with a simple arrow from left to right, small checkmarks and question marks, no code, no automation tools, no logos, no realistic text paragraphs, no gradients, no 3D, no photorealism, no clutter.](https://files.manuscdn.com/user_upload_by_module/session_file/310519663091035343/zumnKtgaMuFmQuqE.png)
 
-- Khi mới vào nghề, tester thường nhận một ticket có vài dòng mô tả rồi được giao nhiệm vụ “test giúp”. Phản xạ phổ biến là mở ứng dụng, bấm thử vài trường hợp và viết test case ngay.
-- Cách làm này dễ bỏ sót điều kiện quan trọng. Tester đang kiểm tra theo suy đoán thay vì theo điều sản phẩm cần đáp ứng.
-- Bài viết này giúp **tester mới, intern và fresher** đọc user story cùng acceptance criteria. Bạn sẽ biết cách tách yêu cầu thành điều kiện kiểm thử và tạo bộ scenario đầu tiên.
-- Phạm vi chỉ tập trung vào kỹ năng phân tích yêu cầu nền tảng. Bạn chưa cần biết automation, API hay framework kiểm thử để áp dụng.
+Khi mới vào nghề, tester thường nhận một ticket vài dòng mô tả rồi được giao nhiệm vụ “test giúp”. Phản xạ phổ biến là mở ứng dụng, bấm thử vài trường hợp và viết test case ngay.
+
+Cách làm này dễ bỏ sót điều kiện quan trọng, vì tester đang kiểm tra theo suy đoán thay vì theo điều sản phẩm cần đáp ứng.
+
+Bài viết này giúp **tester mới, intern và fresher** đọc user story cùng acceptance criteria, từ đó tách yêu cầu thành điều kiện kiểm thử và tạo bộ scenario đầu tiên.
+
+Phạm vi chỉ tập trung vào kỹ năng phân tích yêu cầu nền tảng. Bạn chưa cần biết automation, API hay framework kiểm thử để áp dụng.
 
 ## User story và acceptance criteria khác nhau thế nào?
 
-- User story mô tả một nhu cầu từ góc nhìn người sử dụng. Mẫu quen thuộc là: “Với vai trò là [người dùng], tôi muốn [hành động], để [lợi ích].”
-- Câu này cho tester biết ai cần gì và vì sao nhu cầu có ý nghĩa. Tuy nhiên, user story thường chưa đủ chi tiết để kiểm tra mọi điều kiện.
-- Acceptance criteria, hay điều kiện chấp nhận, là các điều kiện work item phải đáp ứng để được xem là hoàn thành. [Atlassian](https://www.atlassian.com/work-management/project-management/acceptance-criteria) mô tả chúng là những yêu cầu và điều kiện định trước.
-- [Scrum.org](https://www.scrum.org/resources/blog/how-use-acceptance-criteria) cũng nhấn mạnh acceptance criteria giúp team làm rõ scope, giới hạn và outcome của work item.
+User story mô tả một nhu cầu từ góc nhìn người sử dụng theo mẫu “Với vai trò là [người dùng], tôi muốn [hành động], để [lợi ích]”.
+
+Câu này cho tester biết ai cần gì và vì sao, nhưng thường chưa đủ chi tiết để kiểm tra mọi điều kiện.
+
+Acceptance criteria, hay điều kiện chấp nhận, là các điều kiện work item phải đáp ứng để được xem là hoàn thành. [Atlassian](https://www.atlassian.com/work-management/project-management/acceptance-criteria) mô tả chúng là những yêu cầu định trước.
+
+[Scrum.org](https://www.scrum.org/resources/blog/how-use-acceptance-criteria) nhấn mạnh chúng giúp team làm rõ scope, giới hạn và outcome.
 
 | Thành phần | Câu hỏi tester cần trả lời | Ví dụ |
 |---|---|---|
@@ -48,15 +54,15 @@ Ví dụ: “Với vai trò là khách hàng đã đăng nhập, tôi muốn lư
 
 Tester có thể ghi nhận ba điểm:
 
-- Precondition là khách hàng đã đăng nhập.
-- Hành động trung tâm là lưu sản phẩm.
-- Outcome là xem lại sản phẩm trong tương lai.
+- **Precondition**: khách hàng đã đăng nhập.
+- **Hành động trung tâm**: lưu sản phẩm.
+- **Outcome**: xem lại sản phẩm trong tương lai.
 
 Sau đó, hãy đánh dấu các từ có thể ảnh hưởng đến phạm vi kiểm thử:
 
-- “Đã đăng nhập” là precondition.
-- “Sản phẩm” gợi câu hỏi về trạng thái còn bán, hết hàng hoặc đã xóa.
-- “Xem lại” gợi câu hỏi về dữ liệu sau khi reload hoặc đăng nhập lại.
+- **“Đã đăng nhập”** là precondition.
+- **“Sản phẩm”** gợi câu hỏi về trạng thái còn bán, hết hàng hoặc đã xóa.
+- **“Xem lại”** gợi câu hỏi về dữ liệu sau khi reload hoặc đăng nhập lại.
 
 Chỉ đưa các trường hợp này vào test chính thức khi ticket hoặc team xác nhận.
 
@@ -72,10 +78,10 @@ Câu viết lại này chưa phải test case. Nó giúp tester nhìn thấy act
 
 Một acceptance criterion tốt nói về điều kiện có thể quan sát hoặc xác nhận. Khi đọc từng criterion, tester hãy đánh dấu bốn thành phần:
 
-- Động từ hoặc hành động.
-- Dữ liệu đầu vào.
-- Điều kiện giới hạn.
-- Kết quả mong đợi.
+- **Động từ** hoặc hành động.
+- **Dữ liệu đầu vào**.
+- **Điều kiện giới hạn**.
+- **Kết quả mong đợi**.
 
 Giả sử ticket có các criteria sau:
 
@@ -93,10 +99,11 @@ Từ đó, tester có thể tạo bảng phân tích:
 | Bỏ sản phẩm | Sản phẩm đang được yêu thích | Chọn lại biểu tượng | Sản phẩm không còn trong danh sách |
 | Sản phẩm ngừng bán | Đã đăng nhập, sản phẩm ngừng bán | Thử thêm vào yêu thích | Hệ thống từ chối theo cách đã thống nhất |
 
-- Bảng này giúp phân biệt **điều kiện** với **thao tác**. “Đã đăng nhập” là điều kiện đầu vào, còn “chọn biểu tượng” là hành động.
-- Kết quả cần quan sát mới quyết định pass hay fail.
-- Nếu criterion dùng các từ như “nhanh”, “dễ dàng”, “hợp lệ” hoặc “phù hợp” nhưng không có cách đo, hãy ghi lại để hỏi.
-- Tester không nên tự đặt ngưỡng thời gian hoặc quy tắc dữ liệu rồi báo bug. Team cần thống nhất quy tắc trước khi kết luận sản phẩm sai.
+Bảng phân tích giúp phân biệt **điều kiện** với **thao tác**: “Đã đăng nhập” là điều kiện đầu vào, còn “chọn biểu tượng” là hành động. Kết quả cần quan sát mới quyết định pass hay fail.
+
+Nếu criterion dùng các từ như “nhanh”, “dễ dàng”, “hợp lệ” mà không có cách đo, hãy ghi lại để hỏi.
+
+Tester không nên tự đặt ngưỡng thời gian hoặc quy tắc dữ liệu rồi báo bug; team cần thống nhất quy tắc trước khi kết luận sản phẩm sai.
 
 <grid-content>
 Các điểm cần nhớ
@@ -138,9 +145,11 @@ Với tính năng yêu thích, scenario có thể được phân nhóm như sau:
 | Không hợp lệ | Người chưa đăng nhập, sản phẩm ngừng bán |
 | Biên hoặc trạng thái khác | Danh sách rỗng, sản phẩm đã xóa, mạng chậm |
 
-- Chỉ chọn trường hợp phù hợp với scope và rủi ro của ticket.
-- Một scenario tốt không phải là danh sách càng dài càng tốt. Nó phải giúp team nhìn thấy hành vi quan trọng cần xác nhận.
-- Nếu scenario không liên hệ được với user story, acceptance criteria hoặc rủi ro đã thống nhất, hãy hỏi vì sao nó cần xuất hiện.
+Hãy chỉ chọn trường hợp phù hợp với scope và rủi ro của ticket.
+
+Một scenario tốt không phải là danh sách càng dài càng tốt mà là danh sách giúp team nhìn thấy hành vi quan trọng cần xác nhận.
+
+Nếu scenario không liên hệ được với user story, acceptance criteria hoặc rủi ro đã thống nhất, hãy hỏi vì sao nó cần xuất hiện.
 
 <table-testcase cols="5" rows="4" headers="ID|Scenario|Loại|Liên kết criterion|Kết quả mong đợi">
 | S01 | Thêm sản phẩm đang hoạt động | Positive | AC1, AC2 | Sản phẩm được lưu và hiển thị trong danh sách |
@@ -210,10 +219,11 @@ Tester có thể đưa ra giả định để thảo luận, nhưng không nên 
 
 ## Tổng kết
 
-- User story trả lời ai cần gì và vì sao; acceptance criteria mô tả điều kiện để work item được chấp nhận.
-- Hãy tách từng criterion thành input, action, điều kiện giới hạn và kết quả có thể quan sát.
-- Scenario nên bao gồm luồng đúng, luồng không hợp lệ và trường hợp biên phù hợp với scope.
-- Khi yêu cầu mơ hồ, câu hỏi cụ thể có giá trị hơn một test case được xây trên suy đoán.
+User story trả lời ai cần gì và vì sao; acceptance criteria mô tả điều kiện để work item được chấp nhận.
+
+Hãy tách từng criterion thành input, action, điều kiện giới hạn và kết quả có thể quan sát, rồi phủ đủ luồng đúng, luồng không hợp lệ và trường hợp biên phù hợp với scope.
+
+Khi yêu cầu mơ hồ, câu hỏi cụ thể có giá trị hơn một test case được xây trên suy đoán.
 
 Nếu đang học testing, hãy làm theo checklist này:
 

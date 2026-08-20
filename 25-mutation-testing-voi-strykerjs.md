@@ -24,12 +24,15 @@ Mục tiêu là hiểu mental model của mutation testing và thiết kế mộ
 
 ## Mutation testing đang đo điều gì?
 
-- Một mutant là phiên bản của code thật sau khi công cụ áp dụng một thay đổi được gọi là mutation operator.
-- Ví dụ, biểu thức `total >= limit` có thể được đổi thành `total > limit`, hoặc `return isValid` có thể bị đổi thành `return true`.
-- Đây không phải lỗi thật được đưa vào production. Nó là phép thử giả lập để xem test suite có đủ nhạy với thay đổi đó không.
-- Nếu một test fail khi chạy trên mutant, mutant bị **kill**. Nếu toàn bộ test vẫn pass, mutant **survives**.
-- Một mutant sống sót có thể chỉ ra test thiếu assertion, thiếu case biên hoặc đang kiểm tra implementation quá hời hợt.
-- Tuy nhiên, nó cũng có thể là equivalent mutant, tức thay đổi nhìn khác về cú pháp nhưng không làm thay đổi hành vi có thể quan sát.
+Một mutant là phiên bản của code thật sau khi công cụ áp dụng một thay đổi gọi là mutation operator. Ví dụ, `total >= limit` có thể bị đổi thành `total > limit`, hoặc `return isValid` thành `return true`.
+
+Đây không phải lỗi thật được đưa vào production, mà là phép thử giả lập để xem test suite có đủ nhạy với thay đổi đó không. Nếu một test fail khi chạy trên mutant, mutant bị **kill**.
+
+Nếu toàn bộ test vẫn pass, mutant **survives**.
+
+Một mutant sống sót có thể chỉ ra test thiếu assertion, thiếu case biên hoặc kiểm tra implementation quá hời hợt.
+
+Tuy nhiên, nó cũng có thể là equivalent mutant, tức thay đổi khác về cú pháp nhưng không làm thay đổi hành vi có thể quan sát.
 
 | Kết quả | Ý nghĩa thực tế | Việc nên làm |
 |---|---|---|
@@ -39,7 +42,7 @@ Mục tiêu là hiểu mental model của mutation testing và thiết kế mộ
 | Timeout | Mutant làm test chạy quá lâu hoặc bị treo | Kiểm tra test async, dependency và timeout policy |
 | Equivalent | Thay đổi không tạo khác biệt hành vi | Đánh dấu hoặc loại khỏi phân tích nếu có căn cứ |
 
-Theo [tài liệu giới thiệu StrykerJS](https://stryker-mutator.io/docs/stryker-js/introduction/), mutation testing tạo mutant trong code rồi chạy test để xem mutant nào bị kill hoặc sống sót. Mutation score vì vậy không phải phần trăm line coverage được đổi tên.
+Theo [tài liệu giới thiệu StrykerJS](https://stryker-mutator. io/docs/stryker-js/introduction/), mutation testing tạo mutant trong code rồi chạy test để xem mutant nào bị kill hoặc sống sót. Mutation score vì vậy không phải phần trăm line coverage được đổi tên.
 
 Nó là một góc nhìn khác về khả năng test suite phát hiện thay đổi có hại.
 
@@ -52,18 +55,18 @@ Nó là một góc nhìn khác về khả năng test suite phát hiện thay đ�
 - Ví dụ hàm sau có thể được gọi trong test nhưng assertion chỉ kiểm tra hàm không throw exception:
 
 ```ts
-
-- export function canCheckout(total: number, stock: number): boolean {
-- return total > 0 && stock > 0;
-- }
-
+export function canCheckout(total: number, stock: number): boolean {
+  return total > 0 && stock > 0;
+}
 ```
 
-- Một test gọi `canCheckout(100, 5)` và chỉ assert rằng hàm chạy thành công có thể tạo coverage tốt cho dòng và nhánh, nhưng chưa chứng minh `false` được trả về khi `stock` bằng 0.
-- Nếu Stryker đổi `stock > 0` thành `stock >= 0` mà test vẫn pass, mutant sống sót nhắc team rằng boundary assertion đang thiếu.
-- Điều này không có nghĩa code coverage vô dụng. Coverage giúp tìm vùng chưa được chạy.
-- Mutation testing giúp tìm vùng đã chạy nhưng test chưa đủ sức phân biệt hành vi đúng và hành vi bị thay đổi.
-- Hai chỉ số bổ sung cho nhau, không nên dùng một chỉ số để phủ nhận chỉ số còn lại.
+Một test gọi `canCheckout(100, 5)` và chỉ assert rằng hàm chạy thành công có thể tạo coverage tốt cho dòng và nhánh, nhưng chưa chứng minh `false` được trả về khi `stock` bằng 0.
+
+Nếu Stryker đổi `stock > 0` thành `stock >= 0` mà test vẫn pass, mutant sống sót nhắc team rằng boundary assertion đang thiếu.
+
+Điều này không có nghĩa code coverage vô dụng. Coverage giúp tìm vùng chưa được chạy; mutation testing giúp tìm vùng đã chạy nhưng test chưa đủ sức phân biệt hành vi đúng với hành vi bị thay đổi.
+
+Hai chỉ số bổ sung cho nhau, không nên dùng một chỉ số để phủ nhận chỉ số còn lại.
 
 <grid-content>
 Các điểm cần nhớ
@@ -111,13 +114,17 @@ Có thể cần thêm boundary case, negative case hoặc assertion cụ thể.
 
 ## Chuẩn bị project JavaScript hoặc TypeScript
 
-- StrykerJS cần một test runner mà project đang dùng, chẳng hạn Jest, Mocha hoặc Vitest thông qua adapter phù hợp. Trước khi bật mutation testing, unit test thông thường phải chạy ổn định và có thể chạy lặp lại.
-- Nếu test đang flaky, phụ thuộc mạng hoặc dùng dữ liệu thay đổi theo thời gian, mutation run sẽ tạo ra nhiều tín hiệu khó phân biệt.
-- [Tài liệu cấu hình StrykerJS](https://stryker-mutator.io/docs/stryker-js/configuration/) mô tả package, cấu hình, test runner integration và reporter cho project JavaScript hoặc TypeScript. Với project TypeScript, hãy xác định rõ test chạy trên source TypeScript trực tiếp hay trên output đã build.
-- Sai khác giữa `src`, `dist`, alias module và source map có thể khiến báo cáo khó đọc hoặc mutate nhầm file.
-- Một cách khởi đầu an toàn là giới hạn mutate vào một module có logic nghiệp vụ rõ. Không nên mutate toàn bộ monorepo ngay lần đầu.
-- Hãy chọn một module có test hiện hữu, thời gian chạy chấp nhận được và có boundary logic để kết quả giúp team học được điều gì đó.
-- Cấu hình tối thiểu thường cần trả lời bốn câu hỏi:
+StrykerJS cần một test runner đang dùng trong project, chẳng hạn Jest, Mocha hoặc Vitest thông qua adapter phù hợp.
+
+Trước khi bật mutation testing, unit test thông thường phải chạy ổn định và có thể chạy lặp lại; test flaky, phụ thuộc mạng hoặc dữ liệu thay đổi theo thời gian sẽ tạo nhiều tín hiệu khó phân
+
+biệt.
+
+[Tài liệu cấu hình StrykerJS](https://stryker-mutator.io/docs/stryker-js/configuration/) mô tả package, cấu hình, test runner integration và reporter cho project JavaScript hoặc TypeScript. Với project TypeScript, hãy xác định rõ test chạy trên source trực tiếp hay trên output đã build, vì sai khác giữa `src`, `dist`, alias module và source map có thể khiến báo cáo khó đọc hoặc mutate nhầm file.
+
+Cách khởi đầu an toàn là giới hạn mutate vào một module có logic nghiệp vụ rõ và test hiện hữu, thay vì mutate toàn bộ monorepo ngay lần đầu.
+
+Cấu hình tối thiểu thường cần trả lời bốn câu hỏi:
 
 | Câu hỏi | Ví dụ quyết định |
 |---|---|
@@ -132,12 +139,20 @@ Không copy nguyên một cấu hình trên mạng rồi coi là hoàn thành. H
 
 ## Đọc surviving mutant thay vì chỉ nhìn score
 
-- Mutation score là một tín hiệu tổng hợp, nhưng hành động hữu ích nhất thường bắt đầu từ danh sách surviving mutant. Mở từng mutant và hỏi: thay đổi đó có thể đại diện cho bug thật không?
-- Test nào đáng lẽ phải fail? Assertion hiện tại đang kiểm tra output, state, side effect hay chỉ kiểm tra code không ném exception?
-- Hãy phân loại surviving mutant thành bốn nhóm. Nhóm thứ nhất là **missing test**, khi không có scenario cho hành vi đó.
-- Nhóm thứ hai là **weak assertion**, khi test chạy đúng flow nhưng assertion quá rộng. Nhóm thứ ba là **test coupling**, khi test phụ thuộc implementation nên không chạm được behavior cần thiết.
-- Nhóm cuối là **equivalent hoặc không đáng xét**, khi mutant không thể tạo khác biệt quan sát được hoặc nằm trong code không thuộc risk hiện tại.
-- Một workflow triage có thể ghi lại thông tin sau:
+Mutation score là một tín hiệu tổng hợp, nhưng hành động hữu ích nhất thường bắt đầu từ danh sách surviving mutant. Mở từng mutant và hỏi: thay đổi đó có thể đại diện cho bug thật không?
+
+Test nào đáng lẽ phải fail, và assertion hiện tại đang kiểm tra output, state, side effect hay chỉ kiểm tra code không ném exception?
+
+Hãy phân loại surviving mutant thành bốn nhóm:
+
+| Nhóm | Nhận diện |
+|---|---|
+| Missing test | Không có scenario cho hành vi đó |
+| Weak assertion | Test chạy đúng flow nhưng assertion quá rộng |
+| Test coupling | Test phụ thuộc implementation nên không chạm được behavior cần thiết |
+| Equivalent hoặc không đáng xét | Mutant không tạo khác biệt quan sát được hoặc nằm ngoài risk hiện tại |
+
+Một workflow triage có thể ghi lại thông tin sau:
 
 <table-testcase cols="5" rows="4" headers="Mutant|Thay đổi|Chẩn đoán|Hành động|Ưu tiên">
 | M01 | Đổi > thành >= | Boundary assertion thiếu | Thêm test total bằng limit | Cao |
@@ -152,14 +167,19 @@ Nếu chỉ thêm assertion vào implementation detail để làm score tăng, t
 
 ## Tối ưu thời gian chạy trong CI
 
-- Mutation testing thường tốn thời gian hơn unit test thông thường vì có nhiều mutant và mỗi mutant có thể kích hoạt một phần hoặc toàn bộ test suite.
-- StrykerJS có các cơ chế test selection và coverage analysis để giảm số test không liên quan cần chạy, như được mô tả trong [tài liệu tối ưu hóa của StrykerJS](https://stryker-mutator.io/docs/stryker-js/guides/).
-- Tuy vậy, tối ưu chỉ có ý nghĩa sau khi baseline đã đúng.
-- Trong CI, team có thể tách hai mức kiểm tra. Pull request chạy phạm vi nhỏ trên module vừa thay đổi, dùng để phản hồi nhanh.
-- Scheduled job hoặc pipeline chính chạy phạm vi rộng hơn, lưu HTML report và theo dõi các surviving mutant mới.
-- Đừng đặt một global threshold cao ngay khi project chưa có baseline, vì team sẽ dễ tìm cách né quality gate thay vì hiểu nguyên nhân.
-- Một policy thực tế có thể bắt đầu bằng việc không cho phép **giảm** mutation score của module đã có baseline, đồng thời bắt buộc triage các mutant mới liên quan đến logic nghiệp vụ.
-- Threshold chỉ nên là một phần của policy. Code review vẫn cần xem test có thể hiện requirement hay không, còn mutation report chỉ cung cấp thêm bằng chứng.
+Mutation testing thường tốn thời gian hơn unit test thông thường vì nhiều mutant và mỗi mutant có thể kích hoạt một phần hoặc toàn bộ test suite.
+
+StrykerJS có các cơ chế test selection và coverage analysis để giảm số test không liên quan cần chạy, như mô tả trong [tài liệu tối ưu hóa của StrykerJS](https://stryker-mutator. io/docs/stryker-js/guides/).
+
+Tuy vậy, tối ưu chỉ có ý nghĩa sau khi baseline đã đúng.
+
+Trong CI, team có thể tách hai mức kiểm tra: pull request chạy phạm vi nhỏ trên module vừa thay đổi để phản hồi nhanh, scheduled job hoặc pipeline chính chạy phạm vi rộng hơn, lưu HTML report và theo dõi surviving mutant mới.
+
+Đừng đặt một global threshold cao khi project chưa có baseline, vì team dễ tìm cách né quality gate thay vì hiểu nguyên nhân.
+
+Policy thực tế có thể bắt đầu bằng việc không cho phép **giảm** mutation score của module đã có baseline và bắt buộc triage mutant mới liên quan đến logic nghiệp vụ.
+
+Threshold chỉ nên là một phần của policy; code review vẫn cần xem test có thể hiện requirement hay không, còn mutation report chỉ cung cấp thêm bằng chứng.
 
 <multiple-choice correct="C" select="single">
 Khi một mutant survive, hành động đầu tiên có giá trị nhất là gì?
@@ -171,16 +191,21 @@ Khi một mutant survive, hành động đầu tiên có giá trị nhất là g
 
 ## Giới hạn và cách dùng đúng mutation score
 
-- Mutation testing không chứng minh hệ thống không có bug.
-- Bộ mutation operator không bao phủ mọi loại lỗi, equivalent mutant có thể gây nhiễu, còn test suite tốt vẫn cần kiểm tra integration, contract, security, performance và các rủi ro ngoài unit boundary.
-- Mutation score cũng không nên dùng để so sánh máy móc giữa hai repository khác nhau. Một module có logic đơn giản và một module xử lý nhiều side effect sẽ có profile mutant khác nhau.
-- Hãy xem score trong bối cảnh lịch sử của chính module, danh sách mutant bị survive và risk của thay đổi.
-- Nếu team mới bắt đầu, hãy triển khai theo trình tự: chọn một module nhỏ, ghi baseline, đọc report bằng tay, triage một nhóm mutant, thêm test có lý do, rồi mới cân nhắc CI gate.
-- Cách này biến mutation testing thành hoạt động cải thiện feedback loop thay vì một cuộc thi phần trăm.
+Mutation testing không chứng minh hệ thống không có bug.
+
+Bộ mutation operator không bao phủ mọi loại lỗi, equivalent mutant có thể gây nhiễu, còn test suite tốt vẫn cần kiểm tra integration, contract, security, performance và các rủi ro ngoài unit boundary.
+
+Score không nên dùng để so sánh máy móc giữa hai repository khác nhau, vì module logic đơn giản và module nhiều side effect có profile mutant khác nhau.
+
+Hãy xem score trong bối cảnh lịch sử của chính module, danh sách mutant survive và risk của thay đổi.
+
+Nếu team mới bắt đầu, hãy chọn một module nhỏ, ghi baseline, đọc report bằng tay, triage một nhóm mutant, thêm test có lý do, rồi mới cân nhắc CI gate.
+
+Cách này biến mutation testing thành hoạt động cải thiện feedback loop thay vì một cuộc thi phần trăm.
 
 <dropdown-content>
-FAQ về StrykerJS
-> Mutation testing có thay thế code coverage không?
+Mutation testing có thay thế code coverage không?
+> Phân biệt hai câu hỏi khác nhau mà hai kỹ thuật trả lời.
 
 ```markdown
 
@@ -188,19 +213,27 @@ Không. Coverage cho biết vùng code đã được chạy; mutation testing ki
 
 ```
 
-> Có cần giết tất cả mutant không?
+</dropdown-content>
+
+<dropdown-content>
+Có cần giết tất cả mutant không?
+> Mục tiêu là tăng khả năng phát hiện lỗi, không phải tối đa hóa điểm số.
 
 ```markdown
 
-Không nhất thiết. Equivalent mutant và mutant ngoài risk hoặc scope có thể được triage, loại trừ có lý do hoặc ghi nhận riêng. Mục tiêu là tăng khả năng phát hiện lỗi, không phải tối đa hóa điểm số.
+Không nhất thiết. Equivalent mutant và mutant ngoài risk hoặc scope có thể được triage, loại trừ có lý do hoặc ghi nhận riêng.
 
 ```
 
-> Có nên chạy mutation testing ở mọi pull request không?
+</dropdown-content>
+
+<dropdown-content>
+Có nên chạy mutation testing ở mọi pull request không?
+> Quyết định này phụ thuộc vào kích thước project và thời gian chạy.
 
 ```markdown
 
-Tùy kích thước project và thời gian chạy. Có thể chạy phạm vi nhỏ trong pull request và phạm vi rộng theo lịch, miễn là policy, baseline và cách triage được ghi rõ.
+Có thể chạy phạm vi nhỏ trong pull request để phản hồi nhanh và phạm vi rộng theo lịch. Quan trọng là policy, baseline và cách triage phải được ghi rõ.
 
 ```
 
@@ -208,10 +241,9 @@ Tùy kích thước project và thời gian chạy. Có thể chạy phạm vi n
 
 ## Tổng kết
 
-- Mutation testing tạo thay đổi có chủ đích để kiểm tra test suite có phát hiện được thay đổi đó hay không.
-- `Killed`, `Survived`, `No coverage`, `Timeout` và `Equivalent` là các trạng thái cần được đọc khác nhau.
-- StrykerJS nên bắt đầu trên một module nhỏ, có unit test ổn định và cấu hình mutate rõ ràng.
-- Mutation score chỉ là tín hiệu. Surviving mutant, risk và chất lượng assertion mới quyết định hành động tiếp theo.
+Mutation testing tạo thay đổi có chủ đích để kiểm tra test suite có phát hiện được thay đổi đó hay không. Các trạng thái `Killed`, `Survived`, `No coverage`, `Timeout` và `Equivalent` cần được đọc khác nhau.
+
+StrykerJS nên bắt đầu trên một module nhỏ, có unit test ổn định và cấu hình mutate rõ ràng. Mutation score chỉ là tín hiệu; surviving mutant, risk và chất lượng assertion mới quyết định hành động tiếp theo.
 
 Nếu bạn đã có một project JavaScript hoặc TypeScript với unit test ổn định, hãy chạy StrykerJS trên một module nghiệp vụ nhỏ và triage năm surviving mutant đầu tiên.
 
