@@ -1,4 +1,4 @@
-# OWASP AI red teaming cho ứng dụng LLM: Thiết kế test có hệ thống
+# OWASP AI Red Teaming Cho Ứng Dụng LLM
 
 > OWASP AI Testing Guide v1, phát hành ngày 26 tháng 11 năm 2025, đưa trustworthiness testing thành một phạm vi có phương pháp thay vì chỉ thử vài prompt nguy hiểm. Bài viết giúp QA, security tester và AI engineer thiết kế một vòng red teaming có scope, attack hypothesis, evidence và tiêu chí dừng rõ ràng.
 

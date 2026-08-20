@@ -1,4 +1,4 @@
-# AI hỗ trợ viết bug report cho tester mới: Từ triệu chứng đến bằng chứng
+# Viết Bug Report Với AI Cho Tester Mới
 
 > AI có thể giúp tester mới sắp xếp bug report nhanh hơn, nhưng không thể thay thế việc tái hiện lỗi, phân biệt expected result và actual result, hoặc kiểm tra bằng chứng. Bài viết hướng dẫn quy trình nền tảng để biến một quan sát mơ hồ thành báo cáo có thể reproduce.
 
