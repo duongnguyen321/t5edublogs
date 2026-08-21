@@ -76,12 +76,25 @@ Cách tự review bug report trước khi gửi
 > Đọc report như một developer chưa từng thấy flow này.
 
 ```markdown
+**Bắt đầu từ đâu**
+
 1. Người khác có biết bắt đầu từ màn hình hoặc data nào không?
 2. Mỗi step có một hành động rõ ràng không?
-3. Expected result có căn cứ từ requirement không?
-4. Actual result có mô tả behavior quan sát được không?
-5. Screenshot, video, log hoặc request có đủ để kiểm tra không?
-6. Severity đang mô tả impact, không phải mức độ bực mình, đúng không?
+```
+
+```markdown
+**Kết quả và bằng chứng**
+
+1. Expected result có căn cứ từ requirement không?
+2. Actual result có mô tả behavior quan sát được không?
+3. Screenshot, video, log hoặc request có đủ để kiểm tra không?
+```
+
+```markdown
+**Mức độ ảnh hưởng**
+
+1. Severity đang mô tả impact, không phải mức độ bực mình, đúng không?
+2. Report có giúp người nhận hiểu vì sao lỗi cần được ưu tiên không?
 ```
 
 </grid-content>
@@ -96,12 +109,20 @@ Bạn có thể luyện thêm [Hướng Dẫn API Testing Cho Người Mới](ht
 
 <dropdown-content>
 Tester mới có cần học ISTQB trước khi làm test không?
-> Không bắt buộc phải học xong chứng chỉ mới được bắt đầu. Hãy dùng các foundation concept như requirement, risk, expected result, defect và evidence để làm việc, rồi học có hệ thống qua [khu vực luyện thi ISTQB của T5Edu](https://t5edu.site/istqb).
+> Phần giải thích nền tảng dành cho người mới bắt đầu nghề tester.
+
+```markdown
+Không bắt buộc phải học xong chứng chỉ mới được bắt đầu. Hãy dùng các foundation concept như requirement, risk, expected result, defect và evidence để làm việc, rồi học có hệ thống qua [khu vực luyện thi ISTQB của T5Edu](https://t5edu.site/istqb).
+```
 </dropdown-content>
 
 <dropdown-content>
 Nếu test pass nhưng vẫn có bug thì tester đã làm sai chưa?
-> Không nhất thiết. Testing giảm risk bằng evidence trong một phạm vi, dữ liệu và thời điểm cụ thể. Tester cần nói rõ coverage và limitation thay vì hứa rằng sản phẩm không còn defect.
+> Phần giải thích về giới hạn của testing và cách báo cáo coverage.
+
+```markdown
+Không nhất thiết. Testing giảm risk bằng evidence trong một phạm vi, dữ liệu và thời điểm cụ thể. Tester cần nói rõ coverage và limitation thay vì hứa rằng sản phẩm không còn defect.
+```
 </dropdown-content>
 
 ## Tổng kết

@@ -77,13 +77,17 @@ Tách test setup khỏi test intent
 > Setup tạo điều kiện, assertion chứng minh behavior.
 
 ```markdown
-Setup:
+**Setup**
+
 1. Tạo BrowserContext mới.
 2. Install virtual authenticator.
 3. Tạo user data riêng.
 4. Gắn RP ID và origin đúng.
+```
 
-Intent:
+```markdown
+**Intent và cleanup**
+
 1. Thực hiện registration hoặc assertion.
 2. Kiểm tra UI state.
 3. Kiểm tra server-side outcome.
@@ -130,12 +134,20 @@ Bạn cũng nên ghi rõ coverage boundary trong report. “Passkey login pass t
 
 <dropdown-content>
 Có nên lưu private key của passkey để reuse giữa các run không?
-> Có thể dùng trong test isolation nếu key được lưu ở artifact hoặc secret store phù hợp, không commit vào Git và không đưa vào log. Với test registration, tạo credential mới thường phản ánh đúng lifecycle hơn.
+> Lưu ý bảo mật và tính tái lập khi quản lý credential trong test.
+
+```markdown
+Có thể dùng trong test isolation nếu key được lưu ở artifact hoặc secret store phù hợp, không commit vào Git và không đưa vào log. Với test registration, tạo credential mới thường phản ánh đúng lifecycle hơn.
+```
 </dropdown-content>
 
 <dropdown-content>
 Virtual authenticator có thay thế test trên thiết bị thật không?
-> Không. Nó phù hợp để kiểm tra ceremony, state transition và server integration có tính deterministic. Thiết bị thật vẫn cần cho platform behavior, UX prompt, biometric or PIN behavior, sync và browser-specific coverage.
+> Phạm vi coverage mà virtual authenticator có thể chứng minh.
+
+```markdown
+Không. Nó phù hợp để kiểm tra ceremony, state transition và server integration có tính deterministic. Thiết bị thật vẫn cần cho platform behavior, UX prompt, biometric or PIN behavior, sync và browser-specific coverage.
+```
 </dropdown-content>
 
 ## Tổng kết
