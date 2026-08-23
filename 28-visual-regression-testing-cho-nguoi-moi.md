@@ -16,9 +16,9 @@ Một form có thể submit thành công nhưng label bị che, nút nằm ngoà
 
 Vì vậy visual regression testing bổ sung cho test case chức năng, không thay thế chúng.
 
-Nếu đang xây foundation, hãy xem [khóa học Tester và QA trên T5Edu](/courses) để củng cố các khái niệm test case, expected result và defect trước khi thêm visual diff vào bộ kiểm thử.
+Nếu đang xây foundation, hãy xem [danh sách khóa học Tester của T5Edu](https://t5edu.site/courses) để củng cố các khái niệm test case, expected result và defect trước khi thêm visual diff vào bộ kiểm thử.
 
-Bạn cũng có thể xem [các bài blog testing của T5Edu](/blogs) để nối kỹ thuật này với quy trình kiểm thử thực tế.
+Bạn cũng có thể xem [các bài blog testing của T5Edu](https://t5edu.site/blogs) để nối kỹ thuật này với quy trình kiểm thử thực tế.
 
 <multiple-choice correct="C" select="single">
 Một test chức năng kiểm tra nút “Đăng nhập” có thể click và chuyển trang thành công. Visual regression testing bổ sung câu hỏi nào?
@@ -34,7 +34,7 @@ Baseline là ảnh chuẩn để so sánh, nhưng không phải ảnh đầu ti�
 
 Trước khi lưu baseline, tester cần mở trang ở dữ liệu ổn định, kiểm tra viewport, xác nhận font đã tải và bảo đảm nội dung trong ảnh phản ánh trạng thái mà team muốn bảo vệ.
 
-Playwright Test hỗ trợ `await expect(page). toHaveScreenshot()`. Theo [tài liệu visual comparisons của Playwright](https://playwright.dev/docs/test-snapshots), lần chạy đầu tạo reference screenshot, những lần chạy sau so sánh với reference.
+Playwright Test hỗ trợ `await expect(page).toHaveScreenshot()`. Theo [tài liệu visual comparisons của Playwright](https://playwright.dev/docs/test-snapshots), lần chạy đầu tạo reference screenshot, những lần chạy sau so sánh với reference.
 
 Khi một thay đổi giao diện đã được review và chấp nhận, team mới cập nhật baseline bằng cờ `--update-snapshots`, thay vì cập nhật ngay mỗi khi test đỏ.
 
@@ -76,9 +76,9 @@ Tuy nhiên, đừng chọn một ngưỡng lớn chỉ để làm test xanh; ng�
 
 vẫn phải khiến tester điều tra.
 
-Nếu muốn củng cố JavaScript và TypeScript trước khi viết test, [khóa JavaScript cho QA trên T5Edu](/courses/javascript-cho-qa-engineer) là bước chuẩn bị phù hợp.
+Nếu muốn củng cố cách quản lý project và version của test trước khi viết visual test, [khóa học Git và Github cho QA trên T5Edu](https://t5edu.site/courses/git-va-github) là bước chuẩn bị phù hợp.
 
-Người mới cũng nên đọc [blog testing của T5Edu](/blogs) rồi tự chuyển một trạng thái trong đó thành visual test nhỏ.
+Người mới cũng nên đọc [blog testing của T5Edu](https://t5edu.site/blogs) rồi tự chuyển một trạng thái trong đó thành visual test nhỏ.
 
 <table-testcase cols="4" rows="4" headers="ID|Trạng thái|Thao tác|Kết quả mong đợi">
 | VR01 | Trang login mặc định | Mở trang với viewport desktop ổn định | Screenshot khớp baseline |
@@ -99,7 +99,7 @@ Cách thực tế nhất cho người mới là tạo baseline và chạy test t
 
 Khi có vùng động, có ba lựa chọn: mock response để nội dung luôn giống nhau, mask vùng không cần kiểm tra bằng option phù hợp của framework, hoặc tách component động ra khỏi screenshot nếu mục tiêu chỉ
 
-là bảo vệ layout tĩnh. [Best practices của Applitools về Playwright visual testing](https://applitools. com/blog/recap-playwright-visual-testing-best-practices/) cũng khuyến nghị snapshot component nhỏ, xử lý layout shift, mask dữ liệu động và debug theo vùng thay vì chỉ nhìn ảnh toàn trang.
+là bảo vệ layout tĩnh. [Best practices của Applitools về Playwright visual testing](https://applitools.com/blog/recap-playwright-visual-testing-best-practices/) cũng khuyến nghị snapshot component nhỏ, xử lý layout shift, mask dữ liệu động và debug theo vùng thay vì chỉ nhìn ảnh toàn trang.
 
 Đây là nguyên tắc quan trọng: hãy làm giảm nhiễu trước khi tăng tolerance.
 
@@ -179,8 +179,8 @@ Hãy bắt đầu theo lộ trình bốn bước:
 
 Đừng vội bảo vệ mọi route. Một visual test có giá trị phải có mục tiêu mà team hiểu và có thể review khi test fail.
 
-1. Học foundation kiểm thử: kết hợp bài này với [khóa học Tester và QA](/courses).
-2. Luyện tư duy theo câu hỏi và expected result: đọc [khu vực blog testing của T5Edu](/blogs), sau đó thiết kế bảng testcase visual cho màn hình nhỏ.
+1. Học foundation kiểm thử: kết hợp bài này với [danh sách khóa học Tester](https://t5edu.site/courses).
+2. Luyện tư duy theo câu hỏi và expected result: đọc [khu vực blog testing của T5Edu](https://t5edu.site/blogs), sau đó thiết kế bảng testcase visual cho màn hình nhỏ.
 
 ## Tổng kết
 
@@ -192,7 +192,7 @@ Dynamic content, font, animation, viewport và khác biệt môi trường là n
 
 Khi visual diff xuất hiện, tester phải triage trước khi approve, đồng thời phân biệt bug thật với accepted change.
 
-Nếu bạn đã nắm test case và expected result, hãy học thêm [các khóa học nền tảng cho Tester](/courses) rồi tự viết một visual test cho login page.
+Nếu bạn đã nắm test case và expected result, hãy học thêm [các khóa học nền tảng cho Tester](https://t5edu.site/courses) rồi tự viết một visual test cho login page.
 
 Bạn sẽ bảo vệ component nào đầu tiên, và bằng chứng nào giúp bạn quyết định diff đó là bug?
 

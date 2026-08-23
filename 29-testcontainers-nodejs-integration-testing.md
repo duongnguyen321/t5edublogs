@@ -8,7 +8,7 @@
 
 Bài này dành cho automation tester, QA engineer và developer đã có nền tảng TypeScript hoặc JavaScript async-await, Jest hoặc test runner tương đương, Docker, SQL/PostgreSQL và phân biệt được unit test, integration test với end-to-end test.
 
-Nếu bạn chưa biết các khái niệm đó, hãy bắt đầu từ [khóa học Tester và QA trên T5Edu](/courses) và các [bài blog testing nền tảng](/blogs) trước khi triển khai.
+Nếu bạn chưa biết các khái niệm đó, hãy bắt đầu từ [danh sách khóa học Tester trên T5Edu](https://t5edu.site/courses) và [các bài blog testing nền tảng](https://t5edu.site/blogs) trước khi triển khai.
 
 **Testcontainers Node.js** là thư viện điều khiển container tạm thời trong lúc test chạy. Thay vì dùng mock hoặc database chung, test khởi động PostgreSQL thật, lấy connection URI, chạy assertion rồi dọn container theo lifecycle. Trang [Testcontainers chính thức](https://testcontainers.com/) mô tả mô hình này cho database, browser và nhiều dependency khác.
 
@@ -147,7 +147,7 @@ Một repository có thể được kiểm tra bằng unit test với mock để
 
 Hai lớp test trả lời hai câu hỏi khác nhau.
 
-Nếu cần củng cố cách viết query gắn với rule nghiệp vụ, hãy xem [khóa học và nội dung Tester trên T5Edu](/courses), sau đó dùng Testcontainers để kiểm tra chính rule đó trên database thật.
+Nếu cần củng cố cách viết query gắn với rule nghiệp vụ, hãy xem [khóa học SQL dành cho QA engineer trên T5Edu](https://t5edu.site/courses/sql-danh-cho-qa-engineer), sau đó dùng Testcontainers để kiểm tra chính rule đó trên database thật.
 
 Đừng bắt đầu bằng việc tạo một container cho mọi test case nếu chưa biết test nào đang bảo vệ integration boundary.
 
@@ -159,7 +159,7 @@ Container cho mỗi test mạnh về isolation nhưng chậm, trong khi containe
 
 Với suite nhỏ, `beforeAll` và `afterAll` là điểm bắt đầu rõ ràng; nếu test sửa cùng bảng, hãy dùng transaction rollback hoặc truncate có kiểm soát.
 
-Nếu test chạy song song, tránh tên container và cổng cố định. [Tài liệu Node.js của Testcontainers](https://node.testcontainers.org/features/containers/) cảnh báo việc đặt tên container thủ công có thể gây conflict khi tên đã tồn tại. Network alias là lựa chọn phù hợp hơn khi cần giao tiếp giữa container.
+Nếu test chạy song song, tránh tên container và cổng cố định. [tài liệu Containers của Testcontainers Node.js](https://node.testcontainers.org/features/containers/) cảnh báo việc đặt tên container thủ công có thể gây conflict khi tên đã tồn tại. Network alias là lựa chọn phù hợp hơn khi cần giao tiếp giữa container.
 
 Cleanup phải dọn cả client connection lẫn container. Nếu chỉ stop container mà quên `client.end()`, Jest có thể không thoát hoặc log lỗi open handle. Nếu chỉ đóng client, container vẫn giữ tài nguyên Docker, nên hãy xác nhận behavior remove theo API và runtime mà team đang dùng.
 
@@ -223,8 +223,8 @@ Trước khi mở rộng suite, hãy kiểm tra bốn điểm:
 
 Một suite tốt không phải suite có nhiều container nhất. Đó là suite mà dependency thật, dữ liệu, readiness, cleanup và evidence đều được nói rõ trong từng test.
 
-1. Củng cố async-await và xử lý data: học [JavaScript cho QA trên T5Edu](/courses/javascript-cho-qa-engineer) trước khi tổ chức fixture.
-2. Ghi lại decision về mock, dependency thật và mức isolation: dùng [blog testing của T5Edu](/blogs) sau khi integration test đã ổn định.
+1. Củng cố cách viết query và kiểm tra dữ liệu: học [khóa học SQL dành cho QA engineer trên T5Edu](https://t5edu.site/courses/sql-danh-cho-qa-engineer) trước khi tổ chức fixture.
+2. Ghi lại decision về mock, dependency thật và mức isolation: dùng [blog testing của T5Edu](https://t5edu.site/blogs) sau khi integration test đã ổn định.
 
 ## Tổng kết
 
@@ -236,7 +236,7 @@ Mock, shared database và Testcontainers phục vụ các lớp kiểm thử kh�
 
 Pin image version, reset dữ liệu, tránh tên và cổng cố định, đóng client rồi stop container để suite có thể tái hiện trong local và CI.
 
-Nếu bạn đã có nền tảng Docker, TypeScript và database testing, hãy học thêm [nội dung QA và Tester theo khóa học](/courses) rồi chọn một repository boundary để chuyển từ mock sang PostgreSQL thật.
+Nếu bạn đã có nền tảng Docker, TypeScript và database testing, hãy học thêm [khóa học SQL dành cho QA engineer](https://t5edu.site/courses/sql-danh-cho-qa-engineer) rồi chọn một repository boundary để chuyển từ mock sang PostgreSQL thật.
 
 Dependency nào trong hệ thống của bạn đang tạo rủi ro lớn nhất nếu chỉ test bằng mock?
 
